@@ -1,219 +1,243 @@
 import Head from 'next/head'
+import useSwr from 'swr'
+import { GetStaticProps } from 'next'
+import { gql } from 'graphql-request'
+import { Variants } from 'framer-motion'
+import {
+	Box,
+	Text,
+	Grid,
+	Flex,
+	Stack,
+	Tag,
+	Image,
+	MotionBox,
+	MotionGrid,
+} from '../src/atoms'
+import BaseContainer from '../src/containers/BaseContainer'
+import Centroid from '../src/containers/Centroid'
+import MarginContainer from '../src/containers/MarginContainer'
+import { fetchFromCMS } from '../src/functions/fetch'
+import MarginContainerTwoPage from '../src/containers/MarginContainerTwoPage'
+import Widget from '../src/molecules/widget/index'
+import { MotionImage, MotionFlex, MotionStack } from '../src/atoms/index'
 
-// export default function Home() {
-//   return (
-//     <div className="container">
-//       <Head>
-//         <title>Create Next App</title>
-//         <link rel="icon" href="/favicon.ico" />
-//       </Head>
-
-//       <main>
-//         <h1 className="title">
-//           Welcome to <a href="https://nextjs.org">Next.js!</a>
-//         </h1>
-
-//         <p className="description">
-//           Get started by editing <code>pages/index.js</code>
-//         </p>
-
-//         <div className="grid">
-//           <a href="https://nextjs.org/docs" className="card">
-//             <h3>Documentation &rarr;</h3>
-//             <p>Find in-depth information about Next.js features and API.</p>
-//           </a>
-
-//           <a href="https://nextjs.org/learn" className="card">
-//             <h3>Learn &rarr;</h3>
-//             <p>Learn about Next.js in an interactive course with quizzes!</p>
-//           </a>
-
-//           <a
-//             href="https://github.com/vercel/next.js/tree/master/examples"
-//             className="card"
-//           >
-//             <h3>Examples &rarr;</h3>
-//             <p>Discover and deploy boilerplate example Next.js projects.</p>
-//           </a>
-
-//           <a
-//             href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-//             className="card"
-//           >
-//             <h3>Deploy &rarr;</h3>
-//             <p>
-//               Instantly deploy your Next.js site to a public URL with Vercel.
-//             </p>
-//           </a>
-//         </div>
-//       </main>
-
-//       <footer>
-//         <a
-//           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Powered by{' '}
-//           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-//         </a>
-//       </footer>
-
-//       <style jsx>{`
-//         .container {
-//           min-height: 100vh;
-//           padding: 0 0.5rem;
-//           display: flex;
-//           flex-direction: column;
-//           justify-content: center;
-//           align-items: center;
-//         }
-
-//         main {
-//           padding: 5rem 0;
-//           flex: 1;
-//           display: flex;
-//           flex-direction: column;
-//           justify-content: center;
-//           align-items: center;
-//         }
-
-//         footer {
-//           width: 100%;
-//           height: 100px;
-//           border-top: 1px solid #eaeaea;
-//           display: flex;
-//           justify-content: center;
-//           align-items: center;
-//         }
-
-//         footer img {
-//           margin-left: 0.5rem;
-//         }
-
-//         footer a {
-//           display: flex;
-//           justify-content: center;
-//           align-items: center;
-//         }
-
-//         a {
-//           color: inherit;
-//           text-decoration: none;
-//         }
-
-//         .title a {
-//           color: #0070f3;
-//           text-decoration: none;
-//         }
-
-//         .title a:hover,
-//         .title a:focus,
-//         .title a:active {
-//           text-decoration: underline;
-//         }
-
-//         .title {
-//           margin: 0;
-//           line-height: 1.15;
-//           font-size: 4rem;
-//         }
-
-//         .title,
-//         .description {
-//           text-align: center;
-//         }
-
-//         .description {
-//           line-height: 1.5;
-//           font-size: 1.5rem;
-//         }
-
-//         code {
-//           background: #fafafa;
-//           border-radius: 5px;
-//           padding: 0.75rem;
-//           font-size: 1.1rem;
-//           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-//             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-//         }
-
-//         .grid {
-//           display: flex;
-//           align-items: center;
-//           justify-content: center;
-//           flex-wrap: wrap;
-
-//           max-width: 800px;
-//           margin-top: 3rem;
-//         }
-
-//         .card {
-//           margin: 1rem;
-//           flex-basis: 45%;
-//           padding: 1.5rem;
-//           text-align: left;
-//           color: inherit;
-//           text-decoration: none;
-//           border: 1px solid #eaeaea;
-//           border-radius: 10px;
-//           transition: color 0.15s ease, border-color 0.15s ease;
-//         }
-
-//         .card:hover,
-//         .card:focus,
-//         .card:active {
-//           color: #0070f3;
-//           border-color: #0070f3;
-//         }
-
-//         .card h3 {
-//           margin: 0 0 1rem 0;
-//           font-size: 1.5rem;
-//         }
-
-//         .card p {
-//           margin: 0;
-//           font-size: 1.25rem;
-//           line-height: 1.5;
-//         }
-
-//         .logo {
-//           height: 1em;
-//         }
-
-//         @media (max-width: 600px) {
-//           .grid {
-//             width: 100%;
-//             flex-direction: column;
-//           }
-//         }
-//       `}</style>
-
-//       <style jsx global>{`
-//         html,
-//         body {
-//           padding: 0;
-//           margin: 0;
-//           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-//             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-//             sans-serif;
-//         }
-
-//         * {
-//           box-sizing: border-box;
-//         }
-//       `}</style>
-//     </div>
-//   )
-// }
-
-const Home = () => {
-  return (
-    <div>
-      This page is coming soon.
-    </div>
-  )
+interface HomeProps {
+	projects: { bg: string; id: string; title: string }[]
 }
 
-export default Home;
+const containerVariants: Variants = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.1,
+		},
+	},
+}
+
+const childVariants: Variants = {
+	hidden: { opacity: 0, rotateX: -100 },
+	show: { opacity: 1, rotateX: 0 },
+}
+
+const Home: React.FC<HomeProps> = ({ projects, articles }) => {
+	console.log(projects)
+	return (
+		// console.log(projects)
+		<>
+			<MarginContainerTwoPage variants={containerVariants}>
+				<MotionFlex
+					variants={childVariants}
+					width={['100%', '100%', '100%', '50%']}
+					justifyContent="space-between">
+					<Stack spacing="1rem">
+						<MotionImage
+							initial="initial"
+							animate="animate"
+							variants={{
+								initial: { opacity: 0, rotateX: -50, rotateY: 10 },
+								animate: { opacity: 1, rotateX: 0, rotateY: 0 },
+							}}
+							transition={{ duration: 0.5, damping: 10 }}
+							src="https://i.ibb.co/Q8FHs8N/photo-grid-20-09-2020-09-21-20-2.jpg"
+							rounded="md"
+							size="15rem"
+						/>
+						<Text>Hi there! 👋</Text>
+						<Stack direction="row" alignItems="center">
+							<Text fontSize="2rem">I'm Rishi Kothari.</Text>
+							<Tag size="sm" variant="subtle" height="1rem">
+								he/him
+							</Tag>
+						</Stack>
+						<Text>
+							<b>TL;DR</b> I'm a 15 year old developer that really likes to make
+							things using <em>awesome</em> technologies.
+						</Text>
+
+						<Text>
+							I've been programming for about 7 years now (I started all the way
+							back when I was 8), and I've been able to get my hands onto a lot
+							of different technologies and work positions.
+						</Text>
+
+						<Text>
+							While I'm not currently looking for internships, my next opening
+							is in <b>Spring 2021</b>. If you have a cool idea, feel free to
+							write me an email at [hey@rishi.cx].
+						</Text>
+
+						<br />
+					</Stack>
+				</MotionFlex>
+				<MotionStack spacing="1rem" variants={childVariants}>
+					<Text>Selected Works</Text>
+					<MotionGrid
+						templateColumns="repeat(auto-fit, 7rem)"
+						templateRows="repeat(auto-fit, 7rem)"
+						gap={3}
+						variants={containerVariants}
+						initial="hidden"
+						animate="show">
+						{projects.map((project, index) => (
+							<Widget
+								key={index}
+								variants={childVariants}
+								link={`/projects/${project.id}`}
+								bgImage={project.bg}
+								title={project.title}
+								before="Project"
+							/>
+						))}
+					</MotionGrid>
+					{/* <hr /> */}
+					<MotionGrid
+						templateColumns="repeat(auto-fit, 7rem)"
+						templateRows="repeat(auto-fit, 7rem)"
+						gap={3}
+						variants={containerVariants}
+						initial="hidden"
+						animate="show">
+						{articles.map((article, index) => (
+							<Widget
+								key={index}
+								variants={childVariants}
+								link={`/articles/${article.id}`}
+								bgImage={article.bg}
+								title={article.Title}
+								before="Article"
+							/>
+						))}
+					</MotionGrid>
+				</MotionStack>
+			</MarginContainerTwoPage>
+			{/* <div id="home"> */}
+			{/* <MarginContainerTwoPage variants={containerVariants}>
+				<Flex
+					width={['100%', '100%', '100%', '50%']}
+					justifyContent="space-between">
+					<Stack>
+						<Image
+							src="https://i.ibb.co/Q8FHs8N/photo-grid-20-09-2020-09-21-20-2.jpg"
+							rounded="md"
+							size="15rem"
+						/>
+						<Text>Hi there! 👋</Text>
+						<Stack direction="row" alignItems="center">
+							<Text fontSize="2rem">I'm Rishi Kothari.</Text>
+							<Tag size="sm" variant="subtle" height="1rem">
+								he/him
+							</Tag>
+						</Stack>
+						<Text>
+							<b>TL;DR</b> I'm a 15 year old developer that really likes to make
+							things using <em>awesome</em> technologies.
+						</Text>
+
+						<Text>
+							I've been programming for about 7 years now (I started all the way
+							back when I was 8), and I've been able to get my hands onto a lot
+							of different technologies and work positions.
+						</Text>
+
+						<Text>
+							While I'm not currently looking for internships, my next opening
+							is in <b>Spring 2021</b>. If you have a cool idea, feel free to
+							write me an email at [hey@rishi.cx].
+						</Text>
+
+						<br />
+					</Stack>
+				</Flex>
+				<Box variants={childVariants}>
+					<Grid
+						templateColumns="repeat(auto-fit, 7rem)"
+						templateRows="repeat(auto-fit, 7rem)"
+						gap={3}
+						variants={containerVariants}
+						initial="hidden"
+						animate="show">
+						{/* {projects.map((project, index) => {
+							return (
+								<Widget
+									key={index}
+									variants={childVariants}
+									link={`/projects/${project.id}`}
+									bgImage={project.bg}
+									title={project.title}
+								/>
+							)
+						})} */}
+			{/* </Grid>
+				</Box>
+			</MarginContainerTwoPage> */}
+		</>
+	)
+}
+
+export default Home
+
+export const getStaticProps: GetStaticProps = async () => {
+	const { projects, articles } = await fetchFromCMS(gql`
+		{
+			projects {
+				bg
+				id
+				title
+			}
+
+			articles {
+				bg
+				id
+				Title
+			}
+		}
+	`)
+
+	console.log(articles)
+
+	return {
+		props: {
+			projects,
+			articles,
+		},
+	}
+}
+
+// export const getStaticProps: GetStaticProps = async () => {
+// 	// `getStaticProps` is invoked on the server-side,
+// 	// so this `fetcher` function will be executed on the server-side.
+// 	const spotify = await fetchFromSpotify(
+// 		'https://api.spotify.com/v1/me/player/currently-playing?market=NA&additional_types=track'
+// 	)
+
+// 	console.log(await spotifyAPI.getMe())
+
+// 	return {
+// 		props: {
+// 			spotify,
+// 		},
+// 	}
+// 	// return { props: { posts } }
+// }
