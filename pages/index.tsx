@@ -40,7 +40,7 @@ const Home: React.FC<any> = ({ projects, articles }) => {
 					variants={childVariants}
 					width={['100%', '100%', '100%', '50%']}
 					justifyContent="space-between">
-					{Profile()}
+					<Profile />
 				</MotionFlex>
 				<MotionStack spacing="2rem" variants={childVariants}>
 					<Text>Selected Works</Text>
