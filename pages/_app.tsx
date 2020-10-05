@@ -16,8 +16,10 @@ import {
 	Variants,
 } from 'framer-motion'
 import { useEffect } from 'react'
+import { AppProps } from 'next/dist/next-server/lib/router/router'
 import theme from '../src/theme'
 import { MotionFlex } from '../src/atoms/index'
+import { pageVariants } from '../src/molecules/motion/index'
 
 const config = (theme: ITheme) => ({
 	light: {
@@ -34,22 +36,7 @@ const config = (theme: ITheme) => ({
 	},
 })
 
-const pageVariants: Variants = {
-	initial: {
-		opacity: 0,
-		y: -20,
-	},
-	in: {
-		opacity: 1,
-		y: 0,
-	},
-	out: {
-		opacity: 0,
-		y: -20,
-	},
-}
-
-function WApp({ Component, pageProps, router }) {
+const WApp: React.FC<AppProps> = ({ Component, pageProps, router }) => {
 	const cursorX = useMotionValue(-100)
 	const cursorY = useMotionValue(-100)
 
@@ -127,14 +114,6 @@ function WApp({ Component, pageProps, router }) {
 					}
 					body {
 						min-height: 100%;
-					}
-
-					body::-webkit-scrollbar {
-						display: none;
-					}
-					body {
-						-ms-overflow-style: none; /* IE and Edge */
-						scrollbar-width: none; /* Firefox */
 					}
 				`}
 			</style>
