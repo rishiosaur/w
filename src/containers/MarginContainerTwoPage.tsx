@@ -17,7 +17,6 @@ const MarginContainerTwoPage: React.FC<MotionProps & any> = ({
 				'repeat(2, 1fr)',
 			]}
 			height="100%"
-			maxHeight="100%"
 			{...props}>
 			{children}
 		</MotionGrid>
