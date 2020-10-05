@@ -12,7 +12,7 @@ export interface WidgetProps {
 	before?: string
 }
 
-const Widget: React.FC<WidgetProps> = ({
+const Widget: React.FC<WidgetProps & any> = ({
 	children,
 	title = 'Hello',
 	borderColor = 'color',
@@ -21,6 +21,7 @@ const Widget: React.FC<WidgetProps> = ({
 	link,
 	variants,
 	before = '',
+	...props
 }) => {
 	const [isHovered, setHover] = useState(false)
 	return (
@@ -39,7 +40,8 @@ const Widget: React.FC<WidgetProps> = ({
 					backgroundRepeat="no-repeat"
 					backgroundSize="cover"
 					borderColor={borderColor}
-					size={size}>
+					size={size}
+					{...props}>
 					<Text fontSize="0.5rem">{before}</Text>
 					<Text display="inline">{title}</Text>
 					{children}
@@ -50,6 +52,7 @@ const Widget: React.FC<WidgetProps> = ({
 					{`
 						.cursor {
 							border-radius: 17px;
+							background-color: white;
 							width: 1.5rem;
 							height: 1.5rem;
 						}
