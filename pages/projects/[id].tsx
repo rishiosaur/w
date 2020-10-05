@@ -1,11 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { gql } from 'graphql-request'
 import { fetchFromCMS } from '../../src/functions/fetch'
-import MarginContainerTwoPage from '../../src/containers/MarginContainerTwoPage'
+import TwoScreenLayout from '../../src/containers/MarginContainerTwoPage'
 import {
 	MotionImage,
 	Text,
-	Image,
 	Box,
 	Markdown,
 	Tag,
@@ -14,7 +13,7 @@ import {
 } from '../../src/atoms/index'
 
 const ProjectPage: React.FC<any> = ({ project }) => (
-	<MarginContainerTwoPage>
+	<TwoScreenLayout>
 		<MotionImage
 			src={project.bg}
 			size="100%"
@@ -43,7 +42,7 @@ const ProjectPage: React.FC<any> = ({ project }) => (
 			size="100%"
 			display={['none', 'none', 'none', 'inline']}
 		/>
-	</MarginContainerTwoPage>
+	</TwoScreenLayout>
 )
 
 export default ProjectPage
