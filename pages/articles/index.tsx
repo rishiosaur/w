@@ -2,14 +2,15 @@ import { GetStaticProps } from 'next'
 import { gql } from 'graphql-request'
 import Link from 'next/link'
 import { fetchFromCMS } from '../../src/functions/fetch'
-import MarginContainerTwoPage from '../../src/containers/MarginContainerTwoPage'
+import TwoScreenLayout from '../../src/containers/MarginContainerTwoPage'
 import { Stack, Text, MotionStack, TextLink } from '../../src/atoms/index'
 import {
 	childVariants,
 	containerVariants,
-} from '../../src/organisms/Home/Articles'
+} from '../../src/molecules/motion/index'
+
 const ArticlePage: React.FC<any> = ({ articles }) => (
-	<MarginContainerTwoPage>
+	<TwoScreenLayout>
 		<MotionStack variants={containerVariants}>
 			<MotionStack width="50%">
 				<Text fontSize="2rem">Latest Articles</Text>
@@ -42,7 +43,7 @@ const ArticlePage: React.FC<any> = ({ articles }) => (
 				</MotionStack>
 			))}
 		</MotionStack>
-	</MarginContainerTwoPage>
+	</TwoScreenLayout>
 )
 
 export default ArticlePage
