@@ -1,8 +1,8 @@
-import { MotionBox } from '../atoms/index'
+import { MotionBox, MotionFlex } from '../atoms/index'
 
 const MarginContainer: React.FC = ({ children, ...props }) => (
 	<>
-		<MotionBox
+		<MotionFlex
 			{...props}
 			initial="pageInitial"
 			animate="pageAnimate"
@@ -19,14 +19,18 @@ const MarginContainer: React.FC = ({ children, ...props }) => (
 				},
 			}}
 			p={['2rem', '2rem', '2rem', '5rem']}
-			margin="2rem"
+			margin={['0', '0', '0', '2rem']}
+			overflowWrap="break-word"
+			maxWidth="100%"
+			alignItems="center"
+			alignContent="center"
 			borderColor="color"
 			border={['0px', '0px', '0px', '1px']}
-			height={['100%', '100%', '100%', '100vh']}
+			height={['initial', 'initial', 'initial', '100%']}
 			rounded="md">
 			{/* </Flex>/ */}
 			{children}
-		</MotionBox>
+		</MotionFlex>
 		{/* </Flex> */}
 	</>
 )
