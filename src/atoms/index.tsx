@@ -15,7 +15,7 @@ import {
 	ImageProps,
 } from '@chakra-ui/core'
 import { default as MD } from 'markdown-to-jsx'
-import { LinkProps, default as NextLink } from 'next/link'
+import Link, { LinkProps, default as NextLink } from 'next/link'
 
 export const MotionBox = motion.custom(ChakraBox)
 
@@ -24,6 +24,7 @@ export const MotionCode = motion.custom(ChakraCode)
 export const MotionStack = motion.custom(ChakraStack)
 export const MotionGrid = motion.custom(ChakraGrid)
 export const MotionFlex = motion.custom(ChakraFlex)
+export const MotionTag = motion.custom(ChakraTag)
 const I = motion.custom(ChakraImage)
 export const Tag = motion.custom(ChakraTag)
 
@@ -39,34 +40,6 @@ export const MotionImage: React.FC<ImageProps & MotionProps> = ({
 		borderColor="color"
 	/>
 )
-
-export const Link: React.FC<LinkProps> = ({ children, ...props }) => {
-	const [isHovered, setIsHovered] = useState(false)
-
-	const L = motion.custom(NextLink)
-
-	return (
-		<>
-			<L
-				{...props}
-				onHoverStart={() => setIsHovered(true)}
-				onHoverEnd={() => setIsHovered(false)}>
-				{children}
-			</L>
-			{isHovered && (
-				<style jsx global>
-					{`
-						.cursor {
-							border-radius: 17px;
-							width: 1.5rem;
-							height: 1.5rem;
-						}
-					`}
-				</style>
-			)}
-		</>
-	)
-}
 
 export const H1: React.FC = ({ children, ...props }) => (
 	<ChakraText {...props} fontSize="2rem">
@@ -106,3 +79,54 @@ export const Markdown: React.FC<{ children: string }> = ({ children }) => (
 )
 
 export * from '@chakra-ui/core'
+
+interface TextLinkProps {
+	href: string
+	text: string
+}
+
+export const TextLink: React.FC<MotionProps & TextLinkProps & any> = ({
+	href,
+	text,
+	children,
+	...props
+}) => {
+	const [hovered, setHovered] = useState(false)
+	return (
+		<>
+			<Link href={href}>
+				<motion.span
+					onHoverStart={() => {
+						console.log('x')
+						setHovered(true)
+					}}
+					onHoverEnd={() => setHovered(false)}
+					style={{
+						backgroundColor: 'white',
+						color: 'black',
+						padding: '0.25rem',
+						borderRadius: '0.1rem',
+					}}>
+					<motion.a
+						// transition={{ ease: 'ease-in-out' }}
+
+						{...props}>
+						[{text}] {children}
+					</motion.a>
+				</motion.span>
+			</Link>
+			{hovered && (
+				<style jsx global>
+					{`
+						.cursor {
+							border-radius: 0;
+							background-color: white;
+							width: 1.5rem;
+							height: 1.5rem;
+						}
+					`}
+				</style>
+			)}
+		</>
+	)
+}
