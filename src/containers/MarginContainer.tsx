@@ -18,11 +18,11 @@ const MarginContainer: React.FC = ({ children, ...props }) => (
 					opacity: 0,
 				},
 			}}
-			p="5rem"
+			p={['2rem', '2rem', '2rem', '5rem']}
 			margin="2rem"
 			borderColor="color"
-			border="1px"
-			height="100vh"
+			border={['0px', '0px', '0px', '1px']}
+			height={['100%', '100%', '100%', '100vh']}
 			rounded="md">
 			{/* </Flex>/ */}
 			{children}
