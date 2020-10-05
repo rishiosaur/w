@@ -18,40 +18,35 @@ export const childVariants: Variants = {
 	show: { opacity: 1 },
 }
 
-export function Articles(articles: any) {
-	return (
-		<MotionStack
-			variants={containerVariants}
-			initial="hidden"
-			animate="show"
-			spacing={3}>
-			{articles.map((article) => (
-				<MotionStack
-					variants={childVariants}
-					fontSize="0.75rem"
-					height="2rem"
-					direction="row">
-					<Link href={`/articles/${article.id}`}>
-						<>
-							<Stack alignItems="center" fontSize="0.75rem" direction="row">
-								<Text>{article.created_at}</Text>
-								<Text />
-								<TextLink
-									href={`/articles/${article.id}`}
-									text={article.Title}
-								/>
-								<Text />
-								<Text display={['none', 'none', 'none', 'initial']}>
-									{article.Description}
-								</Text>
-							</Stack>
-						</>
-					</Link>
-				</MotionStack>
-			))}
-			<MotionBox variants={childVariants} fontSize="0.75rem">
-				<TextLink href="/articles" text="See More" />
-			</MotionBox>
-		</MotionStack>
-	)
-}
+export const Articles: React.FC<any> = ({ articles }) => (
+	<MotionStack
+		variants={containerVariants}
+		initial="hidden"
+		animate="show"
+		spacing={3}>
+		{articles.map((article) => (
+			<MotionStack
+				variants={childVariants}
+				fontSize="0.75rem"
+				height="2rem"
+				direction="row">
+				<Link href={`/articles/${article.id}`}>
+					<>
+						<Stack alignItems="center" fontSize="0.75rem" direction="row">
+							<Text>{article.created_at}</Text>
+							<Text />
+							<TextLink href={`/articles/${article.id}`} text={article.Title} />
+							<Text />
+							<Text display={['none', 'none', 'none', 'initial']}>
+								{article.Description}
+							</Text>
+						</Stack>
+					</>
+				</Link>
+			</MotionStack>
+		))}
+		<MotionBox variants={childVariants} fontSize="0.75rem">
+			<TextLink href="/articles" text="See More" />
+		</MotionBox>
+	</MotionStack>
+)
