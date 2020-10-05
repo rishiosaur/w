@@ -109,13 +109,14 @@ function WApp({ Component, pageProps, router }) {
 						position: fixed;
 						left: 0;
 						top: 0;
-						width: 1rem;
-						height: 1rem;
+						width: 10px;
+						height: 10px;
 						border: 2px solid white;
+						border-radius: 100rem;
 						mix-blend-mode: difference;
 						z-index: 999;
 						pointer-events: none;
-						transition: width 0.25s ease-in-out, height 0.25s ease-in-out;
+						transition: width 0.1s ease-in-out, height 0.1s ease-in-out;
 					}
 					* {
 						cursor: none;
@@ -126,6 +127,14 @@ function WApp({ Component, pageProps, router }) {
 					}
 					body {
 						min-height: 100%;
+					}
+
+					body::-webkit-scrollbar {
+						display: none;
+					}
+					body {
+						-ms-overflow-style: none; /* IE and Edge */
+						scrollbar-width: none; /* Firefox */
 					}
 				`}
 			</style>
