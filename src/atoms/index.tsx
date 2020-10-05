@@ -15,7 +15,7 @@ import {
 	ImageProps,
 } from '@chakra-ui/core'
 import { default as MD } from 'markdown-to-jsx'
-import Link, { LinkProps, default as NextLink } from 'next/link'
+import Link from 'next/link'
 
 export const MotionBox = motion.custom(ChakraBox)
 
