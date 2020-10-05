@@ -27,8 +27,6 @@ const Post: React.FC<PostProps> = ({ article }) => (
 				backgroundImage={`url('${article.bg}')`}
 				height="100%"
 				width="100%"
-				maxH="100%"
-				maxW="100%"
 				size="100%"
 				backgroundPosition="center"
 				backgroundRepeat="no-repeat"
