@@ -109,7 +109,6 @@ export const TextLink: React.FC<MotionProps & TextLinkProps & any> = ({
 					}}>
 					<motion.a
 						// transition={{ ease: 'ease-in-out' }}
-
 						{...props}>
 						[{text}] {children}
 					</motion.a>
