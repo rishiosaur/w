@@ -1,15 +1,15 @@
 import { Text, Stack, Tag, LightMode } from '../../atoms'
 import Widget from '../../molecules/widget/index'
 import { MotionImage, MotionStack } from '../../atoms/index'
-import { containerVariants, childVariants } from '../../../pages/index'
+import { containerVariants, childVariants } from '../../molecules/motion/index'
 
 export function Profile() {
 	return (
 		<Stack
 			spacing="1rem"
 			overflowWrap="break-word"
-			maxWidth={['75%', '100%', '100%', '100%']}
-			width={['75%', '100%', '100%', '100%']}
+			// maxWidth={['75%', '100%', '100%', '100%']}
+			// width={['75%', '100%', '100%', '100%']}
 			overflow="hidden">
 			<MotionImage
 				initial="initial"
