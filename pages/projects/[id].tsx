@@ -15,6 +15,11 @@ import {
 
 const ProjectPage: React.FC<any> = ({ project }) => (
 	<MarginContainerTwoPage>
+		<MotionImage
+			src={project.bg}
+			size="100%"
+			display={['initial', 'initial', 'initial', 'none']}
+		/>
 		<Box>
 			<Stack
 				marginBottom="1rem"
@@ -35,11 +40,8 @@ const ProjectPage: React.FC<any> = ({ project }) => (
 		</Box>
 		<MotionImage
 			src={project.bg}
-			height="100%"
-			width="100%"
-			maxH="100%"
-			maxW="100%"
 			size="100%"
+			display={['none', 'none', 'none', 'inline']}
 		/>
 	</MarginContainerTwoPage>
 )
