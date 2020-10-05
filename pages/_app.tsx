@@ -21,10 +21,10 @@ import { MotionFlex } from '../src/atoms/index'
 
 const config = (theme: ITheme) => ({
 	light: {
-		color: theme.colors.black,
-		bg: theme.colors.white,
-		borderColor: theme.colors.black,
-		placeholderColor: theme.colors.gray[500],
+		color: theme.colors.white,
+		bg: theme.colors.black,
+		borderColor: theme.colors.white,
+		placeholderColor: theme.colors.whiteAlpha[400],
 	},
 	dark: {
 		color: theme.colors.white,
