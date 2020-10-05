@@ -1,13 +1,13 @@
 import { motion, MotionProps } from 'framer-motion'
-import MarginContainer from './MarginContainer'
-import { MotionGrid } from '../atoms'
+import BaseLayout from './MarginContainer'
+import { GridProps, MotionGrid } from '../atoms'
 import { MotionBox } from '../atoms/index'
 
-const MarginContainerTwoPage: React.FC<MotionProps & any> = ({
+const TwoScreenLayout: React.FC<MotionProps & GridProps & any> = ({
 	children,
 	...props
 }) => (
-	<MarginContainer>
+	<BaseLayout>
 		<MotionGrid
 			gap={3}
 			templateColumns={[
@@ -20,7 +20,7 @@ const MarginContainerTwoPage: React.FC<MotionProps & any> = ({
 			{...props}>
 			{children}
 		</MotionGrid>
-	</MarginContainer>
+	</BaseLayout>
 )
 
-export default MarginContainerTwoPage
+export default TwoScreenLayout
