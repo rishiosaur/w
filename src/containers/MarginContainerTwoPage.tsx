@@ -1,7 +1,6 @@
-import { motion, MotionProps } from 'framer-motion'
+import { MotionProps } from 'framer-motion'
 import BaseLayout from './MarginContainer'
 import { GridProps, MotionGrid } from '../atoms'
-import { MotionBox } from '../atoms/index'
 
 const TwoScreenLayout: React.FC<MotionProps & GridProps & any> = ({
 	children,
