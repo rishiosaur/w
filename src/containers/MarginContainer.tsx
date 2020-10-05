@@ -1,6 +1,6 @@
-import { MotionBox, MotionFlex } from '../atoms/index'
+import { MotionFlex } from '../atoms/index'
 
-const MarginContainer: React.FC = ({ children, ...props }) => (
+const BaseLayout: React.FC = ({ children, ...props }) => (
 	<>
 		<MotionFlex
 			{...props}
@@ -35,4 +35,4 @@ const MarginContainer: React.FC = ({ children, ...props }) => (
 	</>
 )
 
-export default MarginContainer
+export default BaseLayout
