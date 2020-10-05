@@ -41,7 +41,9 @@ export function Articles(articles: any) {
 									text={article.Title}
 								/>
 								<Text />
-								<Text>{article.Description}</Text>
+								<Text display={['none', 'none', 'none', 'initial']}>
+									{article.Description}
+								</Text>
 							</Stack>
 						</>
 					</Link>
