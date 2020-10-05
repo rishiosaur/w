@@ -2,31 +2,20 @@ import Head from 'next/head'
 import useSwr from 'swr'
 import { GetStaticProps } from 'next'
 import { gql } from 'graphql-request'
-import { Variants } from 'framer-motion'
-import {
-	Box,
-	Text,
-	Grid,
-	Flex,
-	Stack,
-	Tag,
-	Image,
-	MotionBox,
-	MotionGrid,
-} from '../src/atoms'
+import { Variants, motion } from 'framer-motion'
+import { Box, Text, Grid, Flex, Image, MotionGrid } from '../src/atoms'
+
 import BaseContainer from '../src/containers/BaseContainer'
 import Centroid from '../src/containers/Centroid'
 import MarginContainer from '../src/containers/MarginContainer'
 import { fetchFromCMS } from '../src/functions/fetch'
 import MarginContainerTwoPage from '../src/containers/MarginContainerTwoPage'
 import Widget from '../src/molecules/widget/index'
-import { MotionImage, MotionFlex, MotionStack } from '../src/atoms/index'
+import { MotionFlex, MotionStack } from '../src/atoms/index'
+import { Profile } from '../src/organisms/Home/Profile'
+import { Articles } from '../src/organisms/Home/Articles'
 
-interface HomeProps {
-	projects: { bg: string; id: string; title: string }[]
-}
-
-const containerVariants: Variants = {
+export const containerVariants: Variants = {
 	hidden: { opacity: 0 },
 	show: {
 		opacity: 1,
@@ -36,12 +25,12 @@ const containerVariants: Variants = {
 	},
 }
 
-const childVariants: Variants = {
+export const childVariants: Variants = {
 	hidden: { opacity: 0, rotateX: -100 },
 	show: { opacity: 1, rotateX: 0 },
 }
 
-const Home: React.FC<HomeProps> = ({ projects, articles }) => {
+const Home: React.FC<any> = ({ projects, articles }) => {
 	console.log(projects)
 	return (
 		// console.log(projects)
@@ -51,48 +40,11 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 					variants={childVariants}
 					width={['100%', '100%', '100%', '50%']}
 					justifyContent="space-between">
-					<Stack spacing="1rem">
-						<MotionImage
-							initial="initial"
-							animate="animate"
-							variants={{
-								initial: { opacity: 0, rotateX: -50, rotateY: 10 },
-								animate: { opacity: 1, rotateX: 0, rotateY: 0 },
-							}}
-							transition={{ duration: 0.5, damping: 10 }}
-							src="https://i.ibb.co/Q8FHs8N/photo-grid-20-09-2020-09-21-20-2.jpg"
-							rounded="md"
-							size="15rem"
-						/>
-						<Text>Hi there! 👋</Text>
-						<Stack direction="row" alignItems="center">
-							<Text fontSize="2rem">I'm Rishi Kothari.</Text>
-							<Tag size="sm" variant="subtle" height="1rem">
-								he/him
-							</Tag>
-						</Stack>
-						<Text>
-							<b>TL;DR</b> I'm a 15 year old developer that really likes to make
-							things using <em>awesome</em> technologies.
-						</Text>
-
-						<Text>
-							I've been programming for about 7 years now (I started all the way
-							back when I was 8), and I've been able to get my hands onto a lot
-							of different technologies and work positions.
-						</Text>
-
-						<Text>
-							While I'm not currently looking for internships, my next opening
-							is in <b>Spring 2021</b>. If you have a cool idea, feel free to
-							write me an email at [hey@rishi.cx].
-						</Text>
-
-						<br />
-					</Stack>
+					{Profile()}
 				</MotionFlex>
-				<MotionStack spacing="1rem" variants={childVariants}>
+				<MotionStack spacing="2rem" variants={childVariants}>
 					<Text>Selected Works</Text>
+
 					<MotionGrid
 						templateColumns="repeat(auto-fit, 7rem)"
 						templateRows="repeat(auto-fit, 7rem)"
@@ -112,7 +64,7 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 						))}
 					</MotionGrid>
 					{/* <hr /> */}
-					<MotionGrid
+					{/* <MotionGrid
 						templateColumns="repeat(auto-fit, 7rem)"
 						templateRows="repeat(auto-fit, 7rem)"
 						gap={3}
@@ -129,7 +81,10 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 								before="Article"
 							/>
 						))}
-					</MotionGrid>
+					</MotionGrid> */}
+
+					<Text>Latest Writings</Text>
+					{Articles(articles)}
 				</MotionStack>
 			</MarginContainerTwoPage>
 			{/* <div id="home"> */}
@@ -207,37 +162,31 @@ export const getStaticProps: GetStaticProps = async () => {
 				title
 			}
 
-			articles {
-				bg
+			articles(sort: "created_at:desc", limit: 10) {
 				id
+				Description
 				Title
+				created_at
 			}
 		}
 	`)
 
-	console.log(articles)
+	const ar = articles.map((article) => ({
+		...article,
+		created_at: new Date(article.created_at).toLocaleDateString('en-US', {
+			weekday: 'short',
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+		}),
+	}))
+
+	console.log(ar)
 
 	return {
 		props: {
 			projects,
-			articles,
+			articles: ar,
 		},
 	}
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-// 	// `getStaticProps` is invoked on the server-side,
-// 	// so this `fetcher` function will be executed on the server-side.
-// 	const spotify = await fetchFromSpotify(
-// 		'https://api.spotify.com/v1/me/player/currently-playing?market=NA&additional_types=track'
-// 	)
-
-// 	console.log(await spotifyAPI.getMe())
-
-// 	return {
-// 		props: {
-// 			spotify,
-// 		},
-// 	}
-// 	// return { props: { posts } }
-// }
