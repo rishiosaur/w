@@ -1,5 +1,6 @@
+/* eslint-disable no-bitwise */
 import { RequestDocument, Variables } from 'graphql-request/dist/types'
-import { request } from 'graphql-request'
+import { request, gql } from 'graphql-request'
 import fetch from 'node-fetch'
 
 export const fetchFromCMS = async (
@@ -11,6 +12,37 @@ export const fetchFromCMS = async (
 		document,
 		variables
 	)
+
+export const getTheme = async () => {
+	const colors = ['blue', 'teal', 'violet']
+	const fg = colors
+	const rfg = fg[~~(Math.random() * fg.length)]
+
+	const bg = colors
+	const rbg = bg[~~(Math.random() * bg.length)]
+
+	console.log('hi')
+	const { palette } = await request(
+		'https://components.ai/api/graphql',
+		gql`
+			{
+				palette {
+					${rfg}s {
+						hex
+					}
+					${rbg}s {
+						hex
+					}
+				}
+			}
+		`
+	)
+
+	const bgc = palette[`${rbg}s`][0].hex
+	const fgc = palette[`${rfg}s`][9].hex
+
+	return { bg: bgc, fg: fgc }
+}
 
 export const fetcher = (options: Record<string, any>) => async (
 	url: string
