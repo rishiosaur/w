@@ -1,5 +1,17 @@
 import { MotionFlex } from '../atoms/index'
+import { pageVariants } from '../molecules/motion/index'
 
+const BaseLayoutMotion = {
+	pageInitial: {
+		opacity: 0,
+	},
+	pageAnimate: {
+		opacity: 1,
+	},
+	exit: {
+		opacity: 0,
+	},
+}
 const BaseLayout: React.FC = ({ children, ...props }) => (
 	<>
 		<MotionFlex
@@ -7,17 +19,7 @@ const BaseLayout: React.FC = ({ children, ...props }) => (
 			initial="pageInitial"
 			animate="pageAnimate"
 			exit="exit"
-			variants={{
-				pageInitial: {
-					opacity: 0,
-				},
-				pageAnimate: {
-					opacity: 1,
-				},
-				exit: {
-					opacity: 0,
-				},
-			}}
+			// variants={pageVariants}
 			p={['2rem', '2rem', '2rem', '10rem']}
 			margin={['0', '0', '0', '2rem']}
 			overflowWrap="break-word"
