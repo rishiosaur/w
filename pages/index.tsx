@@ -13,46 +13,43 @@ import { Profile } from '../src/organisms/Home/Profile'
 import { Articles } from '../src/organisms/Home/Articles'
 import { containerVariants, childVariants } from '../src/molecules/motion/index'
 
-const Home: React.FC<any> = ({ projects, articles }) => {
-	console.log(projects)
-	return (
-		<>
-			<TwoScreenLayout variants={containerVariants}>
-				<MotionFlex
-					variants={childVariants}
-					width={['100%', '100%', '100%', '75%']}
-					justifyContent="space-between">
-					<Profile />
-				</MotionFlex>
-				<MotionStack spacing="2rem" variants={childVariants}>
-					<Text>Selected Works</Text>
+const Home: React.FC<any> = ({ projects, articles }) => (
+	<>
+		<TwoScreenLayout variants={containerVariants}>
+			<MotionFlex
+				variants={childVariants}
+				width={['100%', '100%', '100%', '75%']}
+				justifyContent="space-between">
+				<Profile />
+			</MotionFlex>
+			<MotionStack spacing="2rem" variants={childVariants}>
+				<Text>Selected Works</Text>
 
-					<MotionGrid
-						templateColumns="repeat(auto-fit, 7rem)"
-						templateRows="repeat(auto-fit, 7rem)"
-						gap={3}
-						variants={containerVariants}
-						initial="hidden"
-						animate="show">
-						{projects.map((project, index) => (
-							<Widget
-								key={index}
-								variants={childVariants}
-								link={`/projects/${project.id}`}
-								bgImage={project.bg}
-								title={project.title}
-								before="Project"
-							/>
-						))}
-					</MotionGrid>
+				<MotionGrid
+					templateColumns="repeat(auto-fit, 7rem)"
+					templateRows="repeat(auto-fit, 7rem)"
+					gap={3}
+					variants={containerVariants}
+					initial="hidden"
+					animate="show">
+					{projects.map((project, index) => (
+						<Widget
+							key={index}
+							variants={childVariants}
+							link={`/projects/${project.id}`}
+							bgImage={project.bg}
+							title={project.title}
+							before="Project"
+						/>
+					))}
+				</MotionGrid>
 
-					<Text>Latest Writings</Text>
-					<Articles articles={articles} />
-				</MotionStack>
-			</TwoScreenLayout>
-		</>
-	)
-}
+				<Text>Latest Writings</Text>
+				<Articles articles={articles} />
+			</MotionStack>
+		</TwoScreenLayout>
+	</>
+)
 
 export default Home
 
@@ -83,8 +80,6 @@ export const getStaticProps: GetStaticProps = async () => {
 			day: 'numeric',
 		}),
 	}))
-
-	console.log(ar)
 
 	return {
 		props: {
