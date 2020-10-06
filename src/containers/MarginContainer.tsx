@@ -20,6 +20,7 @@ const BaseLayout: React.FC = ({ children, ...props }) => (
 			animate="pageAnimate"
 			exit="exit"
 			// variants={pageVariants}
+
 			p={['2rem', '2rem', '2rem', '10rem']}
 			margin={['0', '0', '0', '2rem']}
 			overflowWrap="break-word"
