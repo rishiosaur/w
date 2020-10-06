@@ -5,7 +5,7 @@ import { gql } from 'graphql-request'
 import { Variants, motion } from 'framer-motion'
 import { Box, Text, Grid, Flex, Image, MotionGrid } from '../src/atoms'
 
-import { fetchFromCMS } from '../src/functions/fetch'
+import { fetchFromCMS, getNowPlaying } from '../src/functions/fetch'
 import TwoScreenLayout from '../src/containers/MarginContainerTwoPage'
 import Widget from '../src/molecules/widget/index'
 import { MotionFlex, MotionStack } from '../src/atoms/index'
@@ -13,14 +13,14 @@ import { Profile } from '../src/organisms/Home/Profile'
 import { Articles } from '../src/organisms/Home/Articles'
 import { containerVariants, childVariants } from '../src/molecules/motion/index'
 
-const Home: React.FC<any> = ({ projects, articles }) => (
+const Home: React.FC<any> = ({ projects, articles, spotify }) => (
 	<>
 		<TwoScreenLayout variants={containerVariants}>
 			<MotionFlex
 				variants={childVariants}
 				width={['100%', '100%', '100%', '75%']}
 				justifyContent="space-between">
-				<Profile />
+				<Profile spotify={spotify} />
 			</MotionFlex>
 			<MotionStack spacing="2rem" variants={childVariants}>
 				<Text>Selected Works</Text>
@@ -71,6 +71,29 @@ export const getStaticProps: GetStaticProps = async () => {
 		}
 	`)
 
+	const response = await getNowPlaying()
+	let spotify = {}
+
+	if (!(response.status === 204 || response.status > 400)) {
+		// console.log(await response.json())
+
+		const { item: song, is_playing: playing } = await response.json()
+
+		if (playing) {
+			const { album, artists: sptfyArtists, external_urls, name } = song
+
+			const artists = sptfyArtists.map((artist) => artist.name).join(' + ')
+
+			spotify = {
+				artists,
+				album,
+				name,
+				url: external_urls.spotify,
+				playing: true,
+			}
+		}
+	}
+
 	const ar = articles.map((article) => ({
 		...article,
 		created_at: new Date(article.created_at).toLocaleDateString('en-US', {
@@ -85,6 +108,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		props: {
 			projects,
 			articles: ar,
+			spotify,
 		},
 	}
 }
