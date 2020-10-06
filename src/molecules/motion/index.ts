@@ -3,14 +3,24 @@ export const pageVariants: Variants = {
 	initial: {
 		opacity: 0,
 		y: -20,
+		rotateX: 10,
+		rotateY: -10,
 	},
-	in: {
+	animate: {
 		opacity: 1,
 		y: 0,
+		transition: {
+			duration: 0.5,
+			ease: 'circInOut',
+		},
+		rotateX: 0,
+		rotateY: 0,
 	},
 	out: {
 		opacity: 0,
 		y: -20,
+		rotateX: -10,
+		rotateY: -10,
 	},
 }
 
