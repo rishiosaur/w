@@ -49,7 +49,7 @@ const Post: React.FC<PostProps> = ({ article }) => (
 						{article.Description}
 						awefoiawefhoiawehogfiahweogihawogihaweoigoaiwehgoiwegoiwogiawoegih
 					</Text>
-					<Flex>
+					{/* <Flex>
 						{article.categories.map(({ Name, id }) => (
 							<Link href={`/categories/${id}`}>
 								<MotionTag
@@ -61,7 +61,7 @@ const Post: React.FC<PostProps> = ({ article }) => (
 								</MotionTag>
 							</Link>
 						))}
-					</Flex>
+					</Flex> */}
 				</MotionStack>
 			</MotionFlex>
 			<MotionBox marginLeft={['0', '0', '0', '3rem']}>
@@ -97,16 +97,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
 						description
 						pfp
 					}
-
-					categories {
-						id
-						Name
-					}
 				}
 			}
 		`,
 		{ id: context.params.id }
 	)
+
+	console.log(article)
 
 	return {
 		props: {
