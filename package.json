@@ -31,6 +31,7 @@
 		"next": "^9.5.3",
 		"node-fetch": "^2.6.1",
 		"prettier": "^2.1.2",
+		"querystring": "^0.2.0",
 		"react": "^16.13.1",
 		"react-dom": "16.13.1",
 		"react-glitch-effect": "^2.0.2",
