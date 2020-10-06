@@ -11,7 +11,7 @@ export const pageVariants: Variants = {
 		y: 0,
 		transition: {
 			duration: 0.5,
-			ease: 'circInOut',
+			ease: 'easeInOut',
 		},
 		rotateX: 0,
 		rotateY: 0,
