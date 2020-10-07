@@ -1,9 +1,10 @@
-import { Text, Stack, Tag, LightMode } from '../../atoms'
+import { Text, Stack, Tag, LightMode, TextLink, useTheme } from '../../atoms'
 import Widget from '../../molecules/widget/index'
 import { MotionImage, MotionStack } from '../../atoms/index'
 import { containerVariants, childVariants } from '../../molecules/motion/index'
 
-export function Profile() {
+export function Profile({ spotify }) {
+	const theme = useTheme()
 	return (
 		<Stack
 			spacing="1rem"
@@ -30,12 +31,19 @@ export function Profile() {
 			<Text>Hi there! 👋</Text>
 			<Stack direction="row" alignItems="center">
 				<Text fontSize="2rem">I'm Rishi Kothari.</Text>
-				<LightMode>
-					<Tag size="sm" variant="outline">
-						he/him
-					</Tag>
-				</LightMode>
+				{/* <LightMode> */}
+				<TextLink text="he/him" href="https://pronoun.is/he/him" />
+				{/* </LightMode> */}
 			</Stack>
+			{spotify.playing && (
+				<Text>
+					Listening to:{' '}
+					<b>
+						<TextLink href={spotify.url} text={spotify.name} />
+					</b>{' '}
+					by {spotify.artists}
+				</Text>
+			)}
 			<Text>
 				<b>TL;DR</b> I'm a 15 year old developer that really likes to make
 				things using <em>awesome</em> technologies.
