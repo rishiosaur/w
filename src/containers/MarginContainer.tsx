@@ -21,7 +21,7 @@ const BaseLayout: React.FC = ({ children, ...props }) => (
 			exit="exit"
 			// variants={pageVariants}
 			overflowY="scroll"
-			p={['2rem', '2rem', '2rem', '10rem']}
+			p={['5%', '5%', '5%', '8%']}
 			margin={['0', '0', '0', '2rem']}
 			overflowWrap="break-word"
 			maxWidth="100%"
