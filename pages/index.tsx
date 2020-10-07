@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import useSwr from 'swr'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { gql } from 'graphql-request'
 import { Variants, motion } from 'framer-motion'
 import { Box, Text, Grid, Flex, Image, MotionGrid } from '../src/atoms'
@@ -53,7 +53,7 @@ const Home: React.FC<any> = ({ projects, articles, spotify }) => (
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	const { projects, articles } = await fetchFromCMS(gql`
 		{
 			projects {
