@@ -24,7 +24,7 @@ export function Profile({ spotify }) {
 						transition: { duration: 0.5, damping: 10 },
 					},
 				}}
-				src="https://i.ibb.co/Q8FHs8N/photo-grid-20-09-2020-09-21-20-2.jpg"
+				src="https://i.ibb.co/c135DRF/rsz-llcompress.jpg"
 				rounded="md"
 				size="15rem"
 			/>
