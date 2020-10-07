@@ -20,8 +20,8 @@ const BaseLayout: React.FC = ({ children, ...props }) => (
 			animate="pageAnimate"
 			exit="exit"
 			// variants={pageVariants}
-
-			p={['2rem', '2rem', '2rem', '10rem']}
+			overflowY="scroll"
+			p={['5%', '5%', '5%', '8%']}
 			margin={['0', '0', '0', '2rem']}
 			overflowWrap="break-word"
 			maxWidth="100%"

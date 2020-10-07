@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-bitwise */
 import { request, gql } from 'graphql-request'
 import {
@@ -19,7 +20,7 @@ import {
 } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { AppProps } from 'next/dist/next-server/lib/router/router'
-import App from 'next/app'
+import App, { NextWebVitalsMetric } from 'next/app'
 
 import Head from 'next/head'
 import { MotionFlex } from '../src/atoms/index'
@@ -27,16 +28,6 @@ import { pageVariants } from '../src/molecules/motion/index'
 
 import { getStaticPaths } from './articles/[id]'
 import { getTheme } from '../src/functions/fetch'
-
-function toColor(num: number) {
-	// eslint-disable-next-line no-param-reassign
-	num >>>= 0
-	const b = num & 0xff
-	const g = (num & 0xff00) >>> 8
-	const r = (num & 0xff0000) >>> 16
-	const a = ((num & 0xff000000) >>> 24) / 255
-	return `rgba(${[r, g, b, a].join(',')})`
-}
 
 const config = (theme: ITheme) => ({
 	light: {
@@ -169,7 +160,11 @@ WApp.getInitialProps = async (appContext) => {
 
 	const theme = await getTheme()
 
-	return { ...appProps, props: { hi: 'hi', theme } }
+	return { ...appProps, props: { theme } }
 }
 
 export default WApp
+
+// export const reportWebVitals = (metric: NextWebVitalsMetric) => {
+// 	console.log(metric)
+// }

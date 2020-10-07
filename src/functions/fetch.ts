@@ -16,8 +16,7 @@ export const fetchFromCMS = async (
 	)
 
 export const getTheme = async () => {
-	const colors = ['blue', 'teal', 'violet']
-
+	const colors = ['blue', 'teal', 'violet', 'gold', 'red']
 	const c = colors[~~(Math.random() * colors.length)]
 
 	console.log('hi')

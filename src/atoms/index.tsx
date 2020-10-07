@@ -14,6 +14,7 @@ import {
 	BoxProps,
 	ImageProps,
 	useTheme,
+	useColorMode,
 } from '@chakra-ui/core'
 import { default as MD } from 'markdown-to-jsx'
 import Link from 'next/link'
@@ -93,6 +94,7 @@ export const TextLink: React.FC<MotionProps & TextLinkProps & any> = ({
 	...props
 }) => {
 	const [hovered, setHovered] = useState(false)
+	const { colorMode } = useColorMode()
 	const theme = useTheme()
 
 	return (
@@ -105,8 +107,10 @@ export const TextLink: React.FC<MotionProps & TextLinkProps & any> = ({
 					}}
 					onHoverEnd={() => setHovered(false)}
 					style={{
-						backgroundColor: theme.colors.white,
-						color: theme.colors.black,
+						backgroundColor:
+							colorMode === 'dark' ? theme.colors.white : theme.colors.black,
+						color:
+							colorMode === 'dark' ? theme.colors.black : theme.colors.white,
 						padding: '0.25rem',
 						borderRadius: '0.1rem',
 					}}>

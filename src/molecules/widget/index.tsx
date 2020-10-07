@@ -17,7 +17,7 @@ const Widget: React.FC<WidgetProps & any> = ({
 	title = 'Hello',
 	borderColor = 'color',
 	size = '7rem',
-	bgImage,
+	bgImage = '',
 	link,
 	variants,
 	before = '',
