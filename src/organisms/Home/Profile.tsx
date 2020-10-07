@@ -6,12 +6,7 @@ import { containerVariants, childVariants } from '../../molecules/motion/index'
 export function Profile({ spotify }) {
 	const theme = useTheme()
 	return (
-		<Stack
-			spacing="1rem"
-			overflowWrap="break-word"
-			// maxWidth={['75%', '100%', '100%', '100%']}
-			// width={['75%', '100%', '100%', '100%']}
-			overflow="hidden">
+		<Stack spacing="1rem" overflowWrap="break-word" overflow="hidden">
 			<MotionImage
 				initial="initial"
 				animate="animate"
@@ -31,17 +26,13 @@ export function Profile({ spotify }) {
 			<Text>Hi there! 👋</Text>
 			<Stack direction="row" alignItems="center">
 				<Text fontSize="2rem">I'm Rishi Kothari.</Text>
-				{/* <LightMode> */}
+
 				<TextLink text="he/him" href="https://pronoun.is/he/him" />
-				{/* </LightMode> */}
 			</Stack>
 			{spotify.playing && (
 				<Text>
-					Listening to:{' '}
-					<b>
-						<TextLink href={spotify.url} text={spotify.name} />
-					</b>{' '}
-					by {spotify.artists}
+					Listening to: <TextLink href={spotify.url} text={spotify.name} /> by{' '}
+					{spotify.artists}
 				</Text>
 			)}
 			<Text>
