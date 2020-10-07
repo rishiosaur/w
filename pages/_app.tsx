@@ -20,7 +20,7 @@ import {
 } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { AppProps } from 'next/dist/next-server/lib/router/router'
-import App from 'next/app'
+import App, { NextWebVitalsMetric } from 'next/app'
 
 import Head from 'next/head'
 import { MotionFlex } from '../src/atoms/index'
@@ -160,7 +160,11 @@ WApp.getInitialProps = async (appContext) => {
 
 	const theme = await getTheme()
 
-	return { ...appProps, props: { hi: 'hi', theme } }
+	return { ...appProps, props: { theme } }
 }
 
 export default WApp
+
+// export const reportWebVitals = (metric: NextWebVitalsMetric) => {
+// 	console.log(metric)
+// }
