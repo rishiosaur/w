@@ -37,7 +37,7 @@ const Home: React.FC<any> = ({ projects, articles, spotify }) => (
 							key={index}
 							variants={childVariants}
 							link={`/projects/${project.id}`}
-							bgImage={project.bg}
+							bgImage={project.preview}
 							title={project.title}
 							before="Project"
 						/>
@@ -57,9 +57,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	const { projects, articles } = await fetchFromCMS(gql`
 		{
 			projects {
-				bg
 				id
 				title
+				preview
 			}
 
 			articles(sort: "created_at:desc", limit: 10) {
