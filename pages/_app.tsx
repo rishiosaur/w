@@ -27,16 +27,6 @@ import { pageVariants } from '../src/molecules/motion/index'
 import { getStaticPaths } from './articles/[id]'
 import { getTheme } from '../src/functions/fetch'
 
-function toColor(num: number) {
-	// eslint-disable-next-line no-param-reassign
-	num >>>= 0
-	const b = num & 0xff
-	const g = (num & 0xff00) >>> 8
-	const r = (num & 0xff0000) >>> 16
-	const a = ((num & 0xff000000) >>> 24) / 255
-	return `rgba(${[r, g, b, a].join(',')})`
-}
-
 const config = (theme: ITheme) => {
 	console.log(theme.colors.black)
 	console.log(theme.colors.white)
