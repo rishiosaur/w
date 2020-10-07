@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 /* eslint-disable no-bitwise */
 import { request, gql } from 'graphql-request'
 import {
@@ -20,29 +19,45 @@ import {
 } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { AppProps } from 'next/dist/next-server/lib/router/router'
-import App, { NextWebVitalsMetric } from 'next/app'
+import App from 'next/app'
 
-import Head from 'next/head'
 import { MotionFlex } from '../src/atoms/index'
 import { pageVariants } from '../src/molecules/motion/index'
 
 import { getStaticPaths } from './articles/[id]'
 import { getTheme } from '../src/functions/fetch'
 
-const config = (theme: ITheme) => ({
-	light: {
-		color: theme.colors.white,
-		bg: theme.colors.black,
-		borderColor: theme.colors.white,
-		placeholderColor: theme.colors.whiteAlpha[400],
-	},
-	dark: {
-		color: theme.colors.white,
-		bg: theme.colors.black,
-		borderColor: theme.colors.white,
-		placeholderColor: theme.colors.whiteAlpha[400],
-	},
-})
+function toColor(num: number) {
+	// eslint-disable-next-line no-param-reassign
+	num >>>= 0
+	const b = num & 0xff
+	const g = (num & 0xff00) >>> 8
+	const r = (num & 0xff0000) >>> 16
+	const a = ((num & 0xff000000) >>> 24) / 255
+	return `rgba(${[r, g, b, a].join(',')})`
+}
+
+const config = (theme: ITheme) => {
+	console.log(theme.colors.black)
+	console.log(theme.colors.white)
+
+	console.log(theme)
+
+	return {
+		light: {
+			color: theme.colors.white,
+			bg: theme.colors.black,
+			borderColor: theme.colors.white,
+			placeholderColor: theme.colors.whiteAlpha[400],
+		},
+		dark: {
+			color: theme.colors.white,
+			bg: theme.colors.black,
+			borderColor: theme.colors.white,
+			placeholderColor: theme.colors.whiteAlpha[400],
+		},
+	}
+}
 
 function WApp({ Component, pageProps, router, props }) {
 	const cursorX = useMotionValue(-100)
@@ -51,8 +66,6 @@ function WApp({ Component, pageProps, router, props }) {
 	console.log(props)
 
 	const { theme } = props
-
-	console.log(theme)
 
 	const springConfig = { stiffness: 30, duration: 0 }
 	const [color, setColor] = useState('white')
@@ -74,21 +87,10 @@ function WApp({ Component, pageProps, router, props }) {
 
 	return (
 		<>
-			<Head>
-				<link
-					href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-					rel="stylesheet"
-				/>
-			</Head>
 			<AnimatePresence exitBeforeEnter>
 				<ThemeProvider
 					theme={{
 						...ChakraTheme,
-						fonts: {
-							...ChakraTheme.fonts,
-							body: 'Inter, sans-serif',
-							heading: 'Inter, sans-serif',
-						},
 						colors: {
 							...ChakraTheme.colors,
 							black: theme.bg,
@@ -156,15 +158,13 @@ function WApp({ Component, pageProps, router, props }) {
 }
 
 WApp.getInitialProps = async (appContext) => {
+	console.log(await getTheme())
+
 	const appProps = await App.getInitialProps(appContext)
 
 	const theme = await getTheme()
 
-	return { ...appProps, props: { theme } }
+	return { ...appProps, props: { hi: 'hi', theme } }
 }
 
 export default WApp
-
-// export const reportWebVitals = (metric: NextWebVitalsMetric) => {
-// 	console.log(metric)
-// }
