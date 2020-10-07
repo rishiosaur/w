@@ -29,7 +29,7 @@ const BaseLayout: React.FC = ({ children, ...props }) => (
 			alignContent="center"
 			borderColor="color"
 			border={['0px', '0px', '0px', '1px']}
-			height={['initial', 'initial', 'initial', '100%']}
+			height="100%"
 			rounded="md">
 			{/* </Flex>/ */}
 			{children}
