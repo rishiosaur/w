@@ -3,6 +3,8 @@ import { RequestDocument, Variables } from 'graphql-request/dist/types'
 import { request, gql } from 'graphql-request'
 import fetch from 'node-fetch'
 
+import querystring from 'querystring'
+
 export const fetchFromCMS = async (
 	document: RequestDocument,
 	variables?: Variables
@@ -15,33 +17,29 @@ export const fetchFromCMS = async (
 
 export const getTheme = async () => {
 	const colors = ['blue', 'teal', 'violet']
-	const fg = colors
-	const rfg = fg[~~(Math.random() * fg.length)]
 
-	const bg = colors
-	const rbg = bg[~~(Math.random() * bg.length)]
+	const c = colors[~~(Math.random() * colors.length)]
 
 	console.log('hi')
-	const { palette } = await request(
+	const { palette, fontPairing } = await request(
 		'https://components.ai/api/graphql',
 		gql`
 			{
 				palette {
-					${rfg}s {
-						hex
-					}
-					${rbg}s {
+					${c}s {
 						hex
 					}
 				}
+		
 			}
 		`
 	)
 
-	const bgc = palette[`${rbg}s`][0].hex
-	const fgc = palette[`${rfg}s`][9].hex
-
-	return { bg: bgc, fg: fgc }
+	return {
+		bg: palette[`${c}s`][0].hex,
+		fg: palette[`${c}s`][9].hex,
+		fontPairing,
+	}
 }
 
 export const fetcher = (options: Record<string, any>) => async (
@@ -51,6 +49,42 @@ export const fetcher = (options: Record<string, any>) => async (
 	console.log(options)
 	console.log(await (await fetch(new URL(url), options)).json())
 	return (await fetch(new URL(url), options)).json()
+}
+
+const {
+	SPOTIFY_ID: client_id,
+	SPOTIFY_SECRET: client_secret,
+	SPOTIFY_REFRESH: refresh_token,
+} = process.env
+
+const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
+const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`
+const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`
+
+const getAccessToken = async () => {
+	const response = await fetch(TOKEN_ENDPOINT, {
+		method: 'POST',
+		headers: {
+			Authorization: `Basic ${basic}`,
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		body: querystring.stringify({
+			grant_type: 'refresh_token',
+			refresh_token,
+		}),
+	})
+
+	return response.json()
+}
+
+export const getNowPlaying = async () => {
+	const { access_token } = await getAccessToken()
+
+	return fetch(NOW_PLAYING_ENDPOINT, {
+		headers: {
+			Authorization: `Bearer ${access_token}`,
+		},
+	})
 }
 
 export const fetchFromSpotify = fetcher({
