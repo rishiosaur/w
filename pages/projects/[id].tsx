@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps, GetServerSideProps } from 'next'
 import { gql } from 'graphql-request'
 import { fetchFromCMS } from '../../src/functions/fetch'
 import TwoScreenLayout from '../../src/containers/MarginContainerTwoPage'
@@ -47,7 +47,7 @@ const ProjectPage: React.FC<any> = ({ project }) => (
 
 export default ProjectPage
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { project } = await fetchFromCMS(
 		gql`
 			query Query($id: ID!) {
