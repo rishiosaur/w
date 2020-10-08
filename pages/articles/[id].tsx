@@ -15,7 +15,6 @@ import {
 	MotionTag,
 } from '../../src/atoms'
 import { Tag, MotionFlex, Link } from '../../src/atoms/index'
-import { getServerSideProps } from './index'
 
 interface PostProps {
 	article: Record<string, any>
