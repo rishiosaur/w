@@ -24,7 +24,6 @@ import App from 'next/app'
 import { MotionFlex } from '../src/atoms/index'
 import { pageVariants } from '../src/molecules/motion/index'
 
-import { getStaticPaths } from './articles/[id]'
 import { getTheme } from '../src/functions/fetch'
 
 const config = (theme: ITheme) => {
@@ -53,12 +52,9 @@ function WApp({ Component, pageProps, router, props }) {
 	const cursorX = useMotionValue(-100)
 	const cursorY = useMotionValue(-100)
 
-	console.log(props)
-
 	const { theme } = props
 
 	const springConfig = { stiffness: 30, duration: 0 }
-	const [color, setColor] = useState('white')
 	const cursorXSpring = useSpring(cursorX, springConfig)
 	const cursorYSpring = useSpring(cursorY, springConfig)
 
@@ -148,13 +144,11 @@ function WApp({ Component, pageProps, router, props }) {
 }
 
 WApp.getInitialProps = async (appContext) => {
-	console.log(await getTheme())
-
 	const appProps = await App.getInitialProps(appContext)
 
 	const theme = await getTheme()
 
-	return { ...appProps, props: { hi: 'hi', theme } }
+	return { ...appProps, props: { theme } }
 }
 
 export default WApp
