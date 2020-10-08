@@ -32,12 +32,14 @@ export const Tag = motion.custom(ChakraTag)
 
 export const MotionImage: React.FC<ImageProps & MotionProps> = ({
 	children,
+	alt = 'Image',
 	...props
 }) => (
 	<I
 		{...props}
 		border="1px"
 		objectFit="cover"
+		alt={alt}
 		rounded="md"
 		borderColor="color"
 	/>
