@@ -1,7 +1,8 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps, GetServerSideProps } from 'next'
 import { gql } from 'graphql-request'
 import { fetchFromCMS } from '../../src/functions/fetch'
 import TwoScreenLayout from '../../src/containers/MarginContainerTwoPage'
+
 import {
 	MotionImage,
 	Text,
@@ -47,7 +48,7 @@ const ProjectPage: React.FC<any> = ({ project }) => (
 
 export default ProjectPage
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { project } = await fetchFromCMS(
 		gql`
 			query Query($id: ID!) {
@@ -80,22 +81,22 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	}
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	const {
-		projects,
-	}: {
-		projects: { id: string }[]
-	} = await fetchFromCMS(gql`
-		{
-			projects {
-				id
-			}
-		}
-	`)
+// export const getStaticPaths: GetStaticPaths = async () => {
+// 	const {
+// 		projects,
+// 	}: {
+// 		projects: { id: string }[]
+// 	} = await fetchFromCMS(gql`
+// 		{
+// 			projects {
+// 				id
+// 			}
+// 		}
+// 	`)
 
-	const paths = projects.map(({ id }) => ({ params: { id } }))
+// 	const paths = projects.map(({ id }) => ({ params: { id } }))
 
-	console.log(paths)
+// 	console.log(paths)
 
-	return { paths, fallback: false }
-}
+// 	return { paths, fallback: false }
+// }

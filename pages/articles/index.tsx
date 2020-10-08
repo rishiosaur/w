@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetStaticProps, GetServerSideProps } from 'next'
 import { gql } from 'graphql-request'
 import Link from 'next/link'
 import { fetchFromCMS } from '../../src/functions/fetch'
@@ -48,7 +48,7 @@ const ArticlePage: React.FC<any> = ({ articles }) => (
 
 export default ArticlePage
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	const { articles } = await fetchFromCMS(gql`
 		{
 			articles(sort: "created_at:desc") {
