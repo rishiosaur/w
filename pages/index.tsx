@@ -15,6 +15,7 @@ import { containerVariants, childVariants } from '../src/molecules/motion/index'
 
 const Home: React.FC<any> = ({ projects, articles, spotify }) => (
 	<>
+		<HomeSeo />
 		<TwoScreenLayout variants={containerVariants}>
 			<MotionFlex
 				variants={childVariants}
@@ -111,4 +112,48 @@ export const getServerSideProps: GetServerSideProps = async () => {
 			spotify,
 		},
 	}
+}
+function HomeSeo() {
+	return (
+		<Head>
+			<meta name="title" content="e" />
+			<meta name="description" content="e" />
+			<meta name="keywords" content="e" />
+			<meta name="robots" content="index, follow" />
+			<meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+			<meta name="language" content="English" />
+			<meta name="author" content="Rishi Kothari" />
+
+			<title>Rishi Kothari | Developer</title>
+			<meta name="title" content="Rishi Kothari | Developer" />
+			<meta
+				name="description"
+				content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
+			/>
+
+			<meta property="og:type" content="website" />
+			<meta property="og:url" content="https://rki.now.sh" />
+			<meta property="og:title" content="Rishi Kothari | Developer" />
+			<meta
+				property="og:description"
+				content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
+			/>
+			<meta
+				property="og:image"
+				content="https://i.ibb.co/G3xSVSr/photo-grid-20-09-2020-09-21-20-2-2.jpg"
+			/>
+
+			<meta property="twitter:card" content="summary_large_image" />
+			<meta property="twitter:url" content="https://rki.now.sh/" />
+			<meta property="twitter:title" content="Rishi Kothari | Developer" />
+			<meta
+				property="twitter:description"
+				content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
+			/>
+			<meta
+				property="twitter:image"
+				content="https://i.ibb.co/G3xSVSr/photo-grid-20-09-2020-09-21-20-2-2.jpg"
+			/>
+		</Head>
+	)
 }
