@@ -33,6 +33,7 @@ const ProjectPage: React.FC<any> = ({ project }) => (
 						</Tag>
 					))}
 				</Flex>
+
 				<Markdown>{project.content}</Markdown>
 				<hr />
 			</Stack>
