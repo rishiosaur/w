@@ -26,27 +26,20 @@ import { pageVariants } from '../src/molecules/motion/index'
 
 import { getTheme } from '../src/functions/fetch'
 
-const config = (theme: ITheme) => {
-	console.log(theme.colors.black)
-	console.log(theme.colors.white)
-
-	console.log(theme)
-
-	return {
-		light: {
-			color: theme.colors.white,
-			bg: theme.colors.black,
-			borderColor: theme.colors.white,
-			placeholderColor: theme.colors.whiteAlpha[400],
-		},
-		dark: {
-			color: theme.colors.white,
-			bg: theme.colors.black,
-			borderColor: theme.colors.white,
-			placeholderColor: theme.colors.whiteAlpha[400],
-		},
-	}
-}
+const config = (theme: ITheme) => ({
+	light: {
+		color: theme.colors.white,
+		bg: theme.colors.black,
+		borderColor: theme.colors.white,
+		placeholderColor: theme.colors.whiteAlpha[400],
+	},
+	dark: {
+		color: theme.colors.white,
+		bg: theme.colors.black,
+		borderColor: theme.colors.white,
+		placeholderColor: theme.colors.whiteAlpha[400],
+	},
+})
 
 function WApp({ Component, pageProps, router, props }) {
 	const cursorX = useMotionValue(-100)
