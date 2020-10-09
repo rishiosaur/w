@@ -12,9 +12,10 @@ import {
 	MotionStack,
 	Markdown,
 	Flex,
+	Box,
 	MotionTag,
 } from '../../src/atoms'
-import { Tag, MotionFlex, Link } from '../../src/atoms/index'
+import { Tag, MotionFlex, Link, TextLink } from '../../src/atoms/index'
 
 interface PostProps {
 	article: Record<string, any>
@@ -45,23 +46,12 @@ const Post: React.FC<PostProps> = ({ article }) => (
 					maxWidth="30rem">
 					<Text fontSize="0.5rem">Article</Text>
 					<Text fontSize="2rem">{article.Title}</Text>
-					<Text overflowWrap="break-word">
-						{article.Description}
-						awefoiawefhoiawehogfiahweogihawogihaweoigoaiwehgoiwegoiwogiawoegih
-					</Text>
-					{/* <Flex>
-						{article.categories.map(({ Name, id }) => (
-							<Link href={`/categories/${id}`}>
-								<MotionTag
-									display="inline-flex"
-									whileHover={{ opacity: 0.75 }}
-									variant="outline"
-									size="sm">
-									{Name}
-								</MotionTag>
-							</Link>
+					<Text overflowWrap="break-word">{article.Description}</Text>
+					<Flex>
+						{article.categories?.map(({ Name, id }) => (
+							<TextLink href={`/categories/${id}`} text={Name} />
 						))}
-					</Flex> */}
+					</Flex>
 				</MotionStack>
 			</MotionFlex>
 			<MotionBox marginLeft={['0', '0', '0', '3rem']}>
@@ -69,10 +59,15 @@ const Post: React.FC<PostProps> = ({ article }) => (
 					marginBottom="1rem"
 					width={['100%', '100%', '100%', '75%']}
 					spacing="5">
-					<Markdown>{article.content}</Markdown>
+					<Box>
+						<TextLink href="/" text="Home" />
+					</Box>
+					<Text fontSize="1.25rem">
+						<Markdown>{article.content}</Markdown>
+					</Text>
 					<hr />
+					<Text>Article</Text>
 				</MotionStack>
-				<Text>Article</Text>
 			</MotionBox>
 		</MarginContainerTwoPage>
 	</>
