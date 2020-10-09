@@ -75,7 +75,7 @@ const Post: React.FC<PostProps> = ({ article }) => (
 
 export default Post
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
 	const { article } = await fetchFromCMS(
 		gql`
 			query Query($id: ID!) {
@@ -107,20 +107,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	}
 }
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-// 	const {
-// 		articles,
-// 	}: {
-// 		articles: { id: string }[]
-// 	} = await fetchFromCMS(gql`
-// 		{
-// 			articles {
-// 				id
-// 			}
-// 		}
-// 	`)
+export const getStaticPaths: GetStaticPaths = async () => {
+	const {
+		articles,
+	}: {
+		articles: { id: string }[]
+	} = await fetchFromCMS(gql`
+		{
+			articles {
+				id
+			}
+		}
+	`)
 
-// 	const paths = articles.map(({ id }) => ({ params: { id } }))
+	const paths = articles.map(({ id }) => ({ params: { id } }))
 
-// 	return { paths, fallback: false }
-// }
+	return { paths, fallback: false }
+}
