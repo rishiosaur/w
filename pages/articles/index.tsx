@@ -48,7 +48,7 @@ const ArticlePage: React.FC<any> = ({ articles }) => (
 
 export default ArticlePage
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 	const { articles } = await fetchFromCMS(gql`
 		{
 			articles(sort: "created_at:desc") {

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import useSwr from 'swr'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetStaticProps } from 'next'
 import { gql } from 'graphql-request'
 import { Variants, motion } from 'framer-motion'
 import { Box, Text, Grid, Flex, Image, MotionGrid } from '../src/atoms'
@@ -54,7 +54,7 @@ const Home: React.FC<any> = ({ projects, articles, spotify }) => (
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 	const { projects, articles } = await fetchFromCMS(gql`
 		{
 			projects {
@@ -73,14 +73,23 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	`)
 
 	const response = await getNowPlaying()
+
 	let spotify = {}
 
 	if (!(response.status === 204 || response.status > 400)) {
 		// console.log(await response.json())
 
-		const { item: song, is_playing: playing } = await response.json()
+		const { item: song, is_playing: playing, ...other } = await response.json()
 
-		if (playing) {
+		console.log({
+			song,
+			playing,
+			other,
+		})
+
+		console.log(other)
+
+		if (playing && !(other.currently_playing_type === 'ad')) {
 			const { album, artists: sptfyArtists, external_urls, name } = song
 
 			const artists = sptfyArtists.map((artist) => artist.name).join(' + ')
@@ -113,6 +122,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 		},
 	}
 }
+
 function HomeSeo() {
 	return (
 		<Head>

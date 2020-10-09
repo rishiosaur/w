@@ -11,6 +11,7 @@ import {
 	Tag,
 	Stack,
 	Flex,
+	TextLink,
 } from '../../src/atoms/index'
 
 const ProjectPage: React.FC<any> = ({ project }) => (
@@ -27,14 +28,13 @@ const ProjectPage: React.FC<any> = ({ project }) => (
 				spacing="5">
 				<Text fontSize="2rem">{project.title}</Text>
 				<Flex>
-					{project.categories.map(({ Name }) => (
-						<Tag display="inline-flex" variant="outline" size="sm">
-							{Name}
-						</Tag>
+					{project.categories.map(({ Name, id }) => (
+						<TextLink href={`/categories/${id}`} text={Name} />
 					))}
 				</Flex>
-
-				<Markdown>{project.content}</Markdown>
+				<Text>
+					<Markdown>{project.content}</Markdown>
+				</Text>
 				<hr />
 			</Stack>
 			<Text>Article</Text>
@@ -49,7 +49,7 @@ const ProjectPage: React.FC<any> = ({ project }) => (
 
 export default ProjectPage
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
 	const { project } = await fetchFromCMS(
 		gql`
 			query Query($id: ID!) {
@@ -59,6 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 					title
 					categories {
 						Name
+						id
 					}
 					created_at
 					content
@@ -75,29 +76,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		{ id: context.params.id }
 	)
 
-	console.log(project)
-
 	return {
 		props: { project },
 	}
 }
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-// 	const {
-// 		projects,
-// 	}: {
-// 		projects: { id: string }[]
-// 	} = await fetchFromCMS(gql`
-// 		{
-// 			projects {
-// 				id
-// 			}
-// 		}
-// 	`)
+export const getStaticPaths: GetStaticPaths = async () => {
+	const {
+		projects,
+	}: {
+		projects: { id: string }[]
+	} = await fetchFromCMS(gql`
+		{
+			projects {
+				id
+			}
+		}
+	`)
 
-// 	const paths = projects.map(({ id }) => ({ params: { id } }))
+	const paths = projects.map(({ id }) => ({ params: { id } }))
 
-// 	console.log(paths)
+	console.log(paths)
 
-// 	return { paths, fallback: false }
-// }
+	return { paths, fallback: false }
+}
