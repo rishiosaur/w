@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import { request, gql } from 'graphql-request'
 import {
 	Box,
