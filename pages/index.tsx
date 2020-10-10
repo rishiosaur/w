@@ -12,8 +12,14 @@ import { MotionFlex, MotionStack } from '../src/atoms/index'
 import { Profile } from '../src/organisms/Home/Profile'
 import { Articles } from '../src/organisms/Home/Articles'
 import { containerVariants, childVariants } from '../src/molecules/motion/index'
+import { Article, Project } from '../src/types'
 
-const Home: React.FC<any> = ({ projects, articles, spotify }) => (
+type HomeProps = {
+	projects: Partial<Project>[]
+	articles: Partial<Article>[]
+}
+
+const Home: React.FC<HomeProps> = ({ projects, articles /* spotify */ }) => (
 	<>
 		<HomeSeo />
 		<TwoScreenLayout variants={containerVariants}>
@@ -21,7 +27,7 @@ const Home: React.FC<any> = ({ projects, articles, spotify }) => (
 				variants={childVariants}
 				width={['100%', '100%', '100%', '75%']}
 				justifyContent="space-between">
-				<Profile spotify={spotify} />
+				<Profile />
 			</MotionFlex>
 			<MotionStack spacing="2rem" variants={childVariants}>
 				<Text>Selected Works</Text>
@@ -33,7 +39,7 @@ const Home: React.FC<any> = ({ projects, articles, spotify }) => (
 					variants={containerVariants}
 					initial="hidden"
 					animate="show">
-					{projects.map((project, index) => (
+					{projects?.map((project, index) => (
 						<Widget
 							key={index}
 							variants={childVariants}
@@ -54,7 +60,7 @@ const Home: React.FC<any> = ({ projects, articles, spotify }) => (
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 	const { projects, articles } = await fetchFromCMS(gql`
 		{
 			projects {
@@ -65,44 +71,47 @@ export const getStaticProps: GetStaticProps = async () => {
 
 			articles(sort: "created_at:desc", limit: 10) {
 				id
-				Description
-				Title
+				description
+				title
 				created_at
 			}
 		}
 	`)
 
-	const response = await getNowPlaying()
+	console.log(articles)
 
-	let spotify = {}
+	// const response = await getNowPlaying()
 
-	if (!(response.status === 204 || response.status > 400)) {
-		// console.log(await response.json())
+	// console.log(response)
+	// let spotify = {}
 
-		const { item: song, is_playing: playing, ...other } = await response.json()
+	// if (!(response.status === 204 || response.status > 400)) {
+	// 	// console.log(await response.json())
 
-		console.log({
-			song,
-			playing,
-			other,
-		})
+	// 	const { item: song, is_playing: playing, ...other } = await response.json()
 
-		console.log(other)
+	// 	console.log({
+	// 		song,
+	// 		playing,
+	// 		other,
+	// 	})
 
-		if (playing && !(other.currently_playing_type === 'ad')) {
-			const { album, artists: sptfyArtists, external_urls, name } = song
+	// 	console.log(other)
 
-			const artists = sptfyArtists.map((artist) => artist.name).join(' + ')
+	// 	if (playing && !(other.currently_playing_type === 'ad')) {
+	// 		const { album, artists: sptfyArtists, external_urls, name } = song
 
-			spotify = {
-				artists,
-				album,
-				name,
-				url: external_urls.spotify,
-				playing: true,
-			}
-		}
-	}
+	// 		const artists = sptfyArtists.map((artist) => artist.name).join(' + ')
+
+	// 		spotify = {
+	// 			artists,
+	// 			album,
+	// 			name,
+	// 			url: external_urls.spotify,
+	// 			playing: true,
+	// 		}
+	// 	}
+	// }
 
 	const ar = articles.map((article) => ({
 		...article,
@@ -113,57 +122,56 @@ export const getStaticProps: GetStaticProps = async () => {
 			day: 'numeric',
 		}),
 	}))
+	console.log(ar)
 
 	return {
 		props: {
 			projects,
 			articles: ar,
-			spotify,
+			// spotify,
 		},
 	}
 }
 
-function HomeSeo() {
-	return (
-		<Head>
-			<meta name="title" content="e" />
-			<meta name="description" content="e" />
-			<meta name="keywords" content="e" />
-			<meta name="robots" content="index, follow" />
-			<meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-			<meta name="language" content="English" />
-			<meta name="author" content="Rishi Kothari" />
+const HomeSeo: React.FC = () => (
+	<Head>
+		<meta name="title" content="e" />
+		<meta name="description" content="e" />
+		<meta name="keywords" content="e" />
+		<meta name="robots" content="index, follow" />
+		<meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="language" content="English" />
+		<meta name="author" content="Rishi Kothari" />
 
-			<title>Rishi Kothari | Developer</title>
-			<meta name="title" content="Rishi Kothari | Developer" />
-			<meta
-				name="description"
-				content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
-			/>
+		<title>Rishi Kothari | Developer</title>
+		<meta name="title" content="Rishi Kothari | Developer" />
+		<meta
+			name="description"
+			content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
+		/>
 
-			<meta property="og:type" content="website" />
-			<meta property="og:url" content="https://rki.now.sh" />
-			<meta property="og:title" content="Rishi Kothari | Developer" />
-			<meta
-				property="og:description"
-				content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
-			/>
-			<meta
-				property="og:image"
-				content="https://i.ibb.co/G3xSVSr/photo-grid-20-09-2020-09-21-20-2-2.jpg"
-			/>
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://rki.now.sh" />
+		<meta property="og:title" content="Rishi Kothari | Developer" />
+		<meta
+			property="og:description"
+			content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
+		/>
+		<meta
+			property="og:image"
+			content="https://i.ibb.co/G3xSVSr/photo-grid-20-09-2020-09-21-20-2-2.jpg"
+		/>
 
-			<meta property="twitter:card" content="summary_large_image" />
-			<meta property="twitter:url" content="https://rki.now.sh/" />
-			<meta property="twitter:title" content="Rishi Kothari | Developer" />
-			<meta
-				property="twitter:description"
-				content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
-			/>
-			<meta
-				property="twitter:image"
-				content="https://i.ibb.co/G3xSVSr/photo-grid-20-09-2020-09-21-20-2-2.jpg"
-			/>
-		</Head>
-	)
-}
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://rki.now.sh/" />
+		<meta property="twitter:title" content="Rishi Kothari | Developer" />
+		<meta
+			property="twitter:description"
+			content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
+		/>
+		<meta
+			property="twitter:image"
+			content="https://i.ibb.co/G3xSVSr/photo-grid-20-09-2020-09-21-20-2-2.jpg"
+		/>
+	</Head>
+)

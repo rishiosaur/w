@@ -15,13 +15,16 @@ import {
 	Box,
 	MotionTag,
 } from '../../src/atoms'
-import { Tag, MotionFlex, Link, TextLink } from '../../src/atoms/index'
+import { Tag, MotionFlex, Link, TextLink, Divider } from '../../src/atoms/index'
+import { Article } from '../../src/types'
 
 interface PostProps {
-	article: Record<string, any>
+	article: Partial<Article>
+	previousArticle?: Partial<Article>
+	nextArticle?: Partial<Article>
 }
 
-const Post: React.FC<PostProps> = ({ article }) => (
+const Post: React.FC<PostProps> = ({ article, nextArticle }) => (
 	<>
 		<MarginContainerTwoPage>
 			<MotionFlex
@@ -45,11 +48,11 @@ const Post: React.FC<PostProps> = ({ article }) => (
 					rounded="sm"
 					maxWidth="30rem">
 					<Text fontSize="0.5rem">Article</Text>
-					<Text fontSize="2rem">{article.Title}</Text>
-					<Text overflowWrap="break-word">{article.Description}</Text>
+					<Text fontSize="2rem">{article.title}</Text>
+					<Text overflowWrap="break-word">{article.description}</Text>
 					<Flex>
-						{article.categories?.map(({ Name, id }) => (
-							<TextLink href={`/categories/${id}`} text={Name} />
+						{article.categories?.map(({ name, id }) => (
+							<TextLink href={`/categories/${id}`} text={name} />
 						))}
 					</Flex>
 				</MotionStack>
@@ -65,8 +68,16 @@ const Post: React.FC<PostProps> = ({ article }) => (
 					<Text fontSize="1.25rem">
 						<Markdown>{article.content}</Markdown>
 					</Text>
-					<hr />
-					<Text>Article</Text>
+					<Divider />
+					{nextArticle && (
+						<Text>
+							Next Up:{' '}
+							<TextLink
+								text={nextArticle.title}
+								href={`/articles/${nextArticle.id}`}
+							/>
+						</Text>
+					)}
 				</MotionStack>
 			</MotionBox>
 		</MarginContainerTwoPage>
@@ -75,8 +86,12 @@ const Post: React.FC<PostProps> = ({ article }) => (
 
 export default Post
 
-export const getStaticProps: GetStaticProps = async (context) => {
-	const { article } = await fetchFromCMS(
+export const getStaticProps: GetStaticProps<PostProps> = async (context) => {
+	const props: PostProps = {
+		article: {},
+	}
+
+	const { article, articles } = await fetchFromCMS(
 		gql`
 			query Query($id: ID!) {
 				article(id: $id) {
@@ -85,25 +100,35 @@ export const getStaticProps: GetStaticProps = async (context) => {
 					content
 					likes
 					bg
-					Description
-					Title
-					authors {
+					description
+					title
+					categories {
 						name
-						description
-						pfp
+						id
 					}
+				}
+				articles(sort: "created_at:asc") {
+					id
+					title
+					description
 				}
 			}
 		`,
 		{ id: context.params.id }
 	)
 
-	console.log(article)
+	props.article = article
+	const previousArticle = articles[article.id - 2]
+	if (previousArticle) {
+		props.previousArticle = previousArticle
+	}
+	const nextArticle = articles[article.id]
+	if (nextArticle) {
+		props.nextArticle = nextArticle
+	}
 
 	return {
-		props: {
-			article,
-		},
+		props,
 	}
 }
 

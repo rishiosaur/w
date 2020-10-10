@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Variants } from 'framer-motion'
 import { Text, Stack, MotionBox, TextLink } from '../../atoms'
 import { MotionStack } from '../../atoms/index'
+import { Article } from '../../types'
 
 export const containerVariants: Variants = {
 	hidden: { opacity: 0 },
@@ -18,27 +19,31 @@ export const childVariants: Variants = {
 	show: { opacity: 1 },
 }
 
-export const Articles: React.FC<any> = ({ articles }) => (
+type ArticleProps = {
+	articles: Partial<Article>[]
+}
+
+export const Articles: React.FC<ArticleProps> = ({ articles }) => (
 	<MotionStack
 		variants={containerVariants}
 		initial="hidden"
 		animate="show"
 		spacing={3}>
-		{articles.map((article) => (
+		{articles.map(({ created_at, title, description, id }) => (
 			<MotionStack
 				variants={childVariants}
 				fontSize="0.75rem"
 				height="2rem"
 				direction="row">
-				<Link href={`/articles/${article.id}`}>
+				<Link href={`/articles/${id}`}>
 					<>
 						<Stack alignItems="center" fontSize="0.75rem" direction="row">
-							<Text>{article.created_at}</Text>
+							<Text>{created_at}</Text>
 							<Text />
-							<TextLink href={`/articles/${article.id}`} text={article.Title} />
+							<TextLink href={`/articles/${id}`} text={title} />
 							<Text />
 							<Text display={['none', 'none', 'none', 'initial']}>
-								{article.Description}
+								{description}
 							</Text>
 						</Stack>
 					</>

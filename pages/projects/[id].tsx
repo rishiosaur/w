@@ -13,8 +13,13 @@ import {
 	Flex,
 	TextLink,
 } from '../../src/atoms/index'
+import { Project } from '../../src/types'
 
-const ProjectPage: React.FC<any> = ({ project }) => (
+type ProjectPageProps = {
+	project: Partial<Project>
+}
+
+const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => (
 	<TwoScreenLayout>
 		<MotionImage
 			src={project.bg}
@@ -49,7 +54,9 @@ const ProjectPage: React.FC<any> = ({ project }) => (
 
 export default ProjectPage
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<ProjectPageProps> = async (
+	context
+) => {
 	const { project } = await fetchFromCMS(
 		gql`
 			query Query($id: ID!) {
@@ -82,11 +89,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const {
-		projects,
-	}: {
-		projects: { id: string }[]
-	} = await fetchFromCMS(gql`
+	const { projects } = await fetchFromCMS(gql`
 		{
 			projects {
 				id

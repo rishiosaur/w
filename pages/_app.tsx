@@ -18,7 +18,6 @@ import {
 	Variants,
 } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { AppProps } from 'next/dist/next-server/lib/router/router'
 import App from 'next/app'
 
 import { MotionFlex } from '../src/atoms/index'

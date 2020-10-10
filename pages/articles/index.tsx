@@ -8,8 +8,13 @@ import {
 	childVariants,
 	containerVariants,
 } from '../../src/molecules/motion/index'
+import { Article } from '../../src/types'
 
-const ArticlePage: React.FC<any> = ({ articles }) => (
+type ArticlePageProps = {
+	articles: Partial<Article>[]
+}
+
+const ArticlePage: React.FC<ArticlePageProps> = ({ articles }) => (
 	<TwoScreenLayout>
 		<MotionStack variants={containerVariants}>
 			<MotionStack width="50%">
@@ -33,10 +38,10 @@ const ArticlePage: React.FC<any> = ({ articles }) => (
 
 								<TextLink
 									href={`/articles/${article.id}`}
-									text={article.Title}
+									text={article.title}
 								/>
 								<Text />
-								<Text>{article.Description}</Text>
+								<Text>{article.description}</Text>
 							</Stack>
 						</>
 					</Link>
@@ -48,7 +53,7 @@ const ArticlePage: React.FC<any> = ({ articles }) => (
 
 export default ArticlePage
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<ArticlePageProps> = async () => {
 	const { articles } = await fetchFromCMS(gql`
 		{
 			articles(sort: "created_at:desc") {
