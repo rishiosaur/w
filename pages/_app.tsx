@@ -15,9 +15,8 @@ import {
 	motion,
 	useMotionValue,
 	useSpring,
-	Variants,
 } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import App from 'next/app'
 
 import { MotionFlex } from '../src/atoms/index'

@@ -33,8 +33,8 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => (
 				spacing="5">
 				<Text fontSize="2rem">{project.title}</Text>
 				<Flex>
-					{project.categories.map(({ Name, id }) => (
-						<TextLink href={`/categories/${id}`} text={Name} />
+					{project.categories.map(({ name, id }) => (
+						<TextLink href={`/categories/${id}`} text={name} />
 					))}
 				</Flex>
 				<Text>
@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps<ProjectPageProps> = async (
 					id
 					title
 					categories {
-						Name
+						name
 						id
 					}
 					created_at

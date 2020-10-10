@@ -16,10 +16,9 @@ export const fetchFromCMS = async (
 	)
 
 export const getTheme = async () => {
-	const colors = ['blue', 'indigo', 'gold']
+	const colors = ['indigo', 'gold', 'blue', 'red', 'green']
 	const c = colors[~~(Math.random() * colors.length)]
 
-	console.log('hi')
 	const { palette, fontPairing } = await request(
 		'https://components.ai/api/graphql',
 		gql`
@@ -35,8 +34,8 @@ export const getTheme = async () => {
 	)
 
 	return {
-		bg: palette[`${c}s`][0].hex,
-		fg: palette[`${c}s`][9].hex,
+		bg: 'black',
+		fg: palette[`${c}s`][palette[`${c}s`].length - 1].hex,
 		fontPairing,
 	}
 }
