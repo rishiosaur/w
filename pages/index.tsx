@@ -22,21 +22,63 @@ type HomeProps = {
 const Home: React.FC<HomeProps> = ({ projects, articles /* spotify */ }) => (
 	<>
 		<HomeSeo />
-		<TwoScreenLayout variants={containerVariants}>
+		<TwoScreenLayout
+			variants={
+				{
+					hidden: { opacity: 0 },
+
+					show: {
+						opacity: 1,
+						transition: {
+							staggerChildren: 0.5,
+							delayChildren: 0.5,
+						},
+					},
+				} as Variants
+			}>
 			<MotionFlex
-				variants={childVariants}
+				variants={{
+					hidden: { opacity: 0 },
+					show: {
+						opacity: 1,
+						// rotateX: 0,
+						transition: {
+							damping: 100,
+						},
+					},
+				}}
 				width={['100%', '100%', '100%', '75%']}
 				justifyContent="space-between">
 				<Profile />
 			</MotionFlex>
-			<MotionStack spacing="2rem" variants={childVariants}>
+			<MotionStack
+				spacing="2rem"
+				variants={{
+					hidden: { opacity: 0 },
+					show: {
+						opacity: 1,
+						// rotateX: 0,
+						transition: {
+							damping: 100,
+						},
+					},
+				}}>
 				<Text>Selected Works</Text>
 
 				<MotionGrid
 					templateColumns="repeat(auto-fit, 7rem)"
 					templateRows="repeat(auto-fit, 7rem)"
 					gap={3}
-					variants={containerVariants}
+					variants={{
+						hidden: { opacity: 0 },
+						show: {
+							opacity: 1,
+							transition: {
+								staggerChildren: 0.1,
+								delayChildren: 1,
+							},
+						},
+					}}
 					initial="hidden"
 					animate="show">
 					{projects?.map((project, index) => (

@@ -16,6 +16,8 @@ const TwoScreenLayout: React.FC<MotionProps & GridProps & any> = ({
 				'repeat(2, 1fr)',
 			]}
 			height={['100%']}
+			animate="show"
+			initial="hidden"
 			{...props}>
 			{children}
 		</MotionGrid>

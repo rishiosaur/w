@@ -35,6 +35,12 @@ export const containerVariants: Variants = {
 }
 
 export const childVariants: Variants = {
-	hidden: { opacity: 0, rotateX: -100 },
-	show: { opacity: 1, rotateX: 0 },
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		rotateX: 0,
+		transition: {
+			damping: 100,
+		},
+	},
 }
