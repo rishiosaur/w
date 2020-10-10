@@ -55,7 +55,7 @@ export function Profile() {
 				<Widget
 					variants={childVariants}
 					link="https://github.com/rishiosaur"
-					bgImage="https://images.unsplash.com/photo-1569305005583-5725b537a9ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"
+					bgImage="https://source.unsplash.com/pcZvxrAyYoQ/80x80"
 					title="gh"
 					before="link"
 					size="5rem"
@@ -63,7 +63,7 @@ export function Profile() {
 				<Widget
 					variants={childVariants}
 					link="https://github.com/rishiosaur"
-					bgImage="https://images.unsplash.com/photo-1576575230398-b64304828758?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1275&q=80"
+					bgImage="https://source.unsplash.com/8xznAGy4HcY/80x80"
 					title="twtr"
 					before="link"
 					size="5rem"
@@ -71,7 +71,7 @@ export function Profile() {
 				<Widget
 					variants={childVariants}
 					link="https://github.com/rishiosaur"
-					bgImage="https://images.unsplash.com/photo-1509188216857-1e1df4686430?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2600&q=80"
+					bgImage="https://source.unsplash.com/IgWNxx7paz4/80x80"
 					title="ig"
 					before="link"
 					size="5rem"
