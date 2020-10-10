@@ -59,8 +59,8 @@ export const getStaticProps: GetStaticProps<ArticlePageProps> = async () => {
 			articles(sort: "created_at:desc") {
 				id
 				bg
-				Title
-				Description
+				title
+				description
 				created_at
 			}
 		}
