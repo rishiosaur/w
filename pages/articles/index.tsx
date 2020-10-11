@@ -1,4 +1,4 @@
-import { GetStaticProps, GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { gql } from 'graphql-request'
 import Link from 'next/link'
 import { fetchFromCMS } from '../../src/functions/fetch'
