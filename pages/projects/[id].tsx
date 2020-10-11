@@ -12,14 +12,19 @@ import {
 	Stack,
 	Flex,
 	TextLink,
+	Divider,
+	MotionGrid,
 } from '../../src/atoms/index'
 import { Project } from '../../src/types'
+import Widget from '../../src/molecules/widget/index'
+import { childVariants, Articles } from '../../src/organisms/Home/Articles'
 
 type ProjectPageProps = {
 	project: Partial<Project>
+	projects: Partial<Project>[]
 }
 
-const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => (
+const ProjectPage: React.FC<ProjectPageProps> = ({ project, projects }) => (
 	<TwoScreenLayout>
 		<MotionImage
 			src={project.bg}
@@ -40,9 +45,43 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ project }) => (
 				<Text>
 					<Markdown>{project.content}</Markdown>
 				</Text>
-				<hr />
+
+				{project.articles && (
+					<Articles seeMore={false} articles={project.articles} />
+				)}
+
+				<Text fontSize="1.25rem">More Projects</Text>
+				<MotionGrid
+					templateColumns="repeat(auto-fit, 7rem)"
+					gap={3}
+					marginTop={1}
+					variants={{
+						hidden: { opacity: 0 },
+						show: {
+							opacity: 1,
+							transition: {
+								staggerChildren: 0.1,
+								delayChildren: 1,
+							},
+						},
+					}}
+					initial="hidden"
+					animate="show">
+					{projects
+						.filter((_project) => _project.id !== project.id)
+						.map((project, index) => (
+							<Widget
+								key={index}
+								variants={childVariants}
+								link={`/projects/${project.id}`}
+								bgImage={project.preview}
+								title={project.title}
+								before="Project"
+								size="7rem"
+							/>
+						))}
+				</MotionGrid>
 			</Stack>
-			<Text>Article</Text>
 		</Box>
 		<MotionImage
 			src={project.bg}
@@ -57,7 +96,7 @@ export default ProjectPage
 export const getStaticProps: GetStaticProps<ProjectPageProps> = async (
 	context
 ) => {
-	const { project } = await fetchFromCMS(
+	const props = await fetchFromCMS(
 		gql`
 			query Query($id: ID!) {
 				project(id: $id) {
@@ -68,15 +107,20 @@ export const getStaticProps: GetStaticProps<ProjectPageProps> = async (
 						name
 						id
 					}
+					articles {
+						id
+						title
+						description
+					}
 					created_at
 					content
 					likes
 				}
 
-				projects {
+				projects(sort: "id:asc") {
 					id
-					bg
 					title
+					preview
 				}
 			}
 		`,
@@ -84,7 +128,7 @@ export const getStaticProps: GetStaticProps<ProjectPageProps> = async (
 	)
 
 	return {
-		props: { project },
+		props,
 	}
 }
 
