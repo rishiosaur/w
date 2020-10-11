@@ -10,6 +10,15 @@ const typeDefs = gql`
 		age: String!
 		birthday: String!
 		mood: String!
+		spotify: Spotify!
+	}
+
+	type Spotify {
+		artists: String!
+		album: String!
+		name: String!
+		playing: Boolean!
+		url: String!
 	}
 `
 
