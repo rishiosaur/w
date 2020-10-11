@@ -4,7 +4,7 @@ export type Exact<T extends { [key: string]: unknown }> = {
 }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-	ID: string
+	ID: number
 	String: string
 	Boolean: boolean
 	Int: number
