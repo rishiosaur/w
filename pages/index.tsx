@@ -3,6 +3,7 @@ import useSwr from 'swr'
 import { GetServerSideProps, GetStaticProps } from 'next'
 import { gql } from 'graphql-request'
 import { Variants, motion } from 'framer-motion'
+import fetch from 'node-fetch'
 import { Box, Text, Grid, Flex, Image, MotionGrid } from '../src/atoms'
 
 import { fetchFromCMS, getNowPlaying } from '../src/functions/fetch'
@@ -19,86 +20,92 @@ type HomeProps = {
 	articles: Partial<Article>[]
 }
 
-const Home: React.FC<HomeProps> = ({ projects, articles /* spotify */ }) => (
-	<>
-		<HomeSeo />
-		<TwoScreenLayout
-			variants={
-				{
-					hidden: { opacity: 0 },
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
-					show: {
-						opacity: 1,
-						transition: {
-							staggerChildren: 0.5,
-							delayChildren: 0.5,
-						},
-					},
-				} as Variants
-			}>
-			<MotionFlex
-				variants={{
-					hidden: { opacity: 0 },
-					show: {
-						opacity: 1,
-						// rotateX: 0,
-						transition: {
-							damping: 100,
-						},
-					},
-				}}
-				width={['100%', '100%', '100%', '75%']}
-				justifyContent="space-between">
-				<Profile />
-			</MotionFlex>
-			<MotionStack
-				spacing="2rem"
-				variants={{
-					hidden: { opacity: 0 },
-					show: {
-						opacity: 1,
-						// rotateX: 0,
-						transition: {
-							damping: 100,
-						},
-					},
-				}}>
-				<Text>Selected Works</Text>
+const Home: React.FC<HomeProps> = ({ projects, articles }) => {
+	const { data } = useSwr('/api/spotify', fetcher)
 
-				<MotionGrid
-					templateColumns="repeat(auto-fit, 7rem)"
-					templateRows="repeat(auto-fit, 7rem)"
-					gap={3}
+	return (
+		<>
+			<HomeSeo />
+			<TwoScreenLayout
+				variants={
+					{
+						hidden: { opacity: 0 },
+
+						show: {
+							opacity: 1,
+							transition: {
+								staggerChildren: 0.5,
+								delayChildren: 0.5,
+							},
+						},
+					} as Variants
+				}>
+				<MotionFlex
 					variants={{
 						hidden: { opacity: 0 },
 						show: {
 							opacity: 1,
+							// rotateX: 0,
 							transition: {
-								staggerChildren: 0.1,
-								delayChildren: 1,
+								damping: 100,
 							},
 						},
 					}}
-					initial="hidden"
-					animate="show">
-					{projects?.map((project, index) => (
-						<Widget
-							key={index}
-							variants={childVariants}
-							link={`/projects/${project.id}`}
-							bgImage={project.preview}
-							title={project.title}
-							before="Project"
-						/>
-					))}
-				</MotionGrid>
+					width={['100%', '100%', '100%', '75%']}
+					justifyContent="space-between">
+					<Profile spotify={data} />
+				</MotionFlex>
+				<MotionStack
+					spacing="2rem"
+					variants={{
+						hidden: { opacity: 0 },
+						show: {
+							opacity: 1,
+							// rotateX: 0,
+							transition: {
+								damping: 100,
+							},
+						},
+					}}>
+					<Text>Selected Works</Text>
 
-				<Text>Latest Writings</Text>
-				<Articles articles={articles} />
-			</MotionStack>
-		</TwoScreenLayout>
-	</>
-)
+					<MotionGrid
+						templateColumns="repeat(auto-fit, 7rem)"
+						templateRows="repeat(auto-fit, 7rem)"
+						gap={3}
+						variants={{
+							hidden: { opacity: 0 },
+							show: {
+								opacity: 1,
+								transition: {
+									staggerChildren: 0.1,
+									delayChildren: 1,
+								},
+							},
+						}}
+						initial="hidden"
+						animate="show">
+						{projects?.map((project, index) => (
+							<Widget
+								key={index}
+								variants={childVariants}
+								link={`/projects/${project.id}`}
+								bgImage={project.preview}
+								title={project.title}
+								before="Project"
+							/>
+						))}
+					</MotionGrid>
+
+					<Text>Latest Writings</Text>
+					<Articles articles={articles} />
+				</MotionStack>
+			</TwoScreenLayout>
+		</>
+	)
+}
 
 export default Home
 

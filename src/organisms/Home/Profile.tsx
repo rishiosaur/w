@@ -3,7 +3,7 @@ import Widget from '../../molecules/widget/index'
 import { MotionImage, MotionStack } from '../../atoms/index'
 import { containerVariants, childVariants } from '../../molecules/motion/index'
 
-export function Profile() {
+export function Profile({ spotify }) {
 	return (
 		<Stack spacing="1rem" overflowWrap="break-word" overflow="hidden">
 			<MotionImage
@@ -28,12 +28,12 @@ export function Profile() {
 
 				<TextLink text="he/him" href="https://pronoun.is/he/him" />
 			</Stack>
-			{/* {spotify?.playing && (
+			{spotify?.playing && (
 				<Text>
 					Listening to: <TextLink href={spotify.url} text={spotify.name} /> by{' '}
 					{spotify.artists}
 				</Text>
-			)} */}
+			)}
 			<Text>
 				<b>TL;DR</b> I'm a 15 year old developer that really likes to make
 				things using <em>awesome</em> technologies.

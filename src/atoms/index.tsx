@@ -104,7 +104,6 @@ export const TextLink: React.FC<MotionProps & TextLinkProps & any> = ({
 			<Link href={href}>
 				<motion.span
 					onHoverStart={() => {
-						console.log('x')
 						setHovered(true)
 					}}
 					onHoverEnd={() => setHovered(false)}
