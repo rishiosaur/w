@@ -184,16 +184,8 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 
 const HomeSeo: React.FC = () => (
 	<Head>
-		<meta name="title" content="e" />
-		<meta name="description" content="e" />
-		<meta name="keywords" content="e" />
-		<meta name="robots" content="index, follow" />
-		<meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="language" content="English" />
-		<meta name="author" content="Rishi Kothari" />
-
-		<title>Rishi Kothari | Developer</title>
-		<meta name="title" content="Rishi Kothari | Developer" />
+		<title>Rishi Kothari | Software Engineer</title>
+		<meta name="title" content="Rishi Kothari | Software Engineer" />
 		<meta
 			name="description"
 			content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
@@ -201,7 +193,7 @@ const HomeSeo: React.FC = () => (
 
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://rki.now.sh" />
-		<meta property="og:title" content="Rishi Kothari | Developer" />
+		<meta property="og:title" content="Rishi Kothari | Software Engineer" />
 		<meta
 			property="og:description"
 			content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
@@ -213,7 +205,10 @@ const HomeSeo: React.FC = () => (
 
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content="https://rki.now.sh/" />
-		<meta property="twitter:title" content="Rishi Kothari | Developer" />
+		<meta
+			property="twitter:title"
+			content="Rishi Kothari | Software Engineer"
+		/>
 		<meta
 			property="twitter:description"
 			content="Hi there! I'm Rishi Kothari, and I make cool things using cutting-edge technologies. I'm a 15-year-old high schooler living in Ontario, Canada."
