@@ -22,9 +22,20 @@ export const childVariants: Variants = {
 
 type ArticleProps = {
 	articles: Partial<Article>[]
+	seeMore?: boolean
 }
 
-export const Articles: React.FC<ArticleProps> = ({ articles }) => (
+function truncateString(str) {
+	if (str.length <= 50) {
+		return str
+	}
+	return `${str.slice(0, 50)}...`
+}
+
+export const Articles: React.FC<ArticleProps> = ({
+	articles,
+	seeMore = true,
+}) => (
 	<MotionStack
 		variants={containerVariants}
 		initial="hidden"
@@ -41,18 +52,18 @@ export const Articles: React.FC<ArticleProps> = ({ articles }) => (
 						<Stack alignItems="center" fontSize="0.75rem" direction="row">
 							<Text>{created_at}</Text>
 							<Text />
-							<TextLink href={`/articles/${id}`} text={title} />
+							<TextLink href={`/articles/${id}`} text={truncateString(title)} />
 							<Text />
-							<Text display={['none', 'none', 'none', 'initial']}>
-								{description}
-							</Text>
+							<Text>{truncateString(description)}</Text>
 						</Stack>
 					</>
 				</Link>
 			</MotionStack>
 		))}
-		<MotionBox variants={childVariants} fontSize="0.75rem">
-			<TextLink href="/articles" text="See More" />
-		</MotionBox>
+		{seeMore && (
+			<MotionBox variants={childVariants} fontSize="0.75rem">
+				<TextLink href="/articles" text="See More" />
+			</MotionBox>
+		)}
 	</MotionStack>
 )
