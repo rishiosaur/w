@@ -9,6 +9,7 @@ import {
 	ThemeProvider,
 	theme as ChakraTheme,
 } from '@chakra-ui/core'
+
 import {
 	AnimatePresence,
 	motion,
@@ -17,8 +18,6 @@ import {
 } from 'framer-motion'
 import { useEffect } from 'react'
 import App from 'next/app'
-
-import Head from 'next/head'
 import { MotionFlex } from '../src/atoms/index'
 import { pageVariants } from '../src/molecules/motion/index'
 
