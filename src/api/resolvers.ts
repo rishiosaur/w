@@ -24,7 +24,7 @@ const getCurrentlyListening = async () => {
 	if (!(response.status === 204 || response.status > 400)) {
 		const { item: song, is_playing: playing, ...other } = await response.json()
 
-		if (playing && !(other.currently_playing_type == 'ad')) {
+		if (playing && !(other.currently_playing_type === 'ad')) {
 			const { album, artists: sptfyArtists, external_urls, name } = song
 
 			const artists = sptfyArtists.map((artist) => artist.name).join(' + ')
