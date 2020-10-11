@@ -35,8 +35,9 @@ export function Profile({ spotify }) {
 				</Text>
 			)}
 			<Text>
-				<b>TL;DR</b> I'm a 15 year old developer that really likes to make
-				things using <em>awesome</em> technologies.
+				<b>TL;DR</b> I'm a 15 year old software engineer, SaaS startup CEO, and
+				coffee lover that really likes to make things using <em>awesome</em>{' '}
+				technologies.
 			</Text>
 
 			<Text>
