@@ -9,16 +9,13 @@ const BaseLayout: React.FC = ({ children, ...props }) => (
 			animate="pageAnimate"
 			exit="exit"
 			variants={pageVariants}
-			overflow="scroll"
+			overflow="visible"
 			p={['5%', '5%', '5%', '8%']}
 			margin={['0', '0', '0', '2rem']}
 			overflowWrap="break-word"
 			maxWidth="100%"
 			alignItems="center"
 			alignContent="center"
-			borderColor="color"
-			border={['0px', '0px', '0px', '1px']}
-			height="100%"
 			rounded="md">
 			{/* </Flex>/ */}
 			{children}
