@@ -16,7 +16,7 @@ export const fetchFromCMS = async (
 	)
 
 export const getTheme = async () => {
-	const colors = ['indigo', 'gold', 'blue', 'red', 'green']
+	const colors = ['indigo', 'gold', 'blue', 'violet']
 	const c = colors[~~(Math.random() * colors.length)]
 
 	const { palette, fontPairing } = await request(

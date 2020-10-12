@@ -3,7 +3,13 @@ import { gql } from 'graphql-request'
 import Link from 'next/link'
 import { fetchFromCMS } from '../../src/functions/fetch'
 import TwoScreenLayout from '../../src/containers/MarginContainerTwoPage'
-import { Stack, Text, MotionStack, TextLink } from '../../src/atoms/index'
+import {
+	Stack,
+	Text,
+	MotionStack,
+	TextLink,
+	MotionImage,
+} from '../../src/atoms/index'
 import {
 	childVariants,
 	containerVariants,
@@ -16,12 +22,13 @@ type ArticlePageProps = {
 
 const ArticlePage: React.FC<ArticlePageProps> = ({ articles }) => (
 	<TwoScreenLayout>
-		<MotionStack variants={containerVariants}>
-			<MotionStack width="50%">
+		<MotionStack variants={containerVariants} spacing="1.5rem">
+			<MotionStack width="50%" spacing="2rem">
 				<Text fontSize="2rem">Latest Articles</Text>
 				<Text fontSize="1rem">
 					Occasionally, I'll post some musings about life on here. You can also
-					implement your own clients for this following my API spec.
+					implement your own clients for this following my{' '}
+					<TextLink text="API spec." href="/api/graphql" />
 				</Text>
 			</MotionStack>
 
@@ -48,6 +55,10 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ articles }) => (
 				</MotionStack>
 			))}
 		</MotionStack>
+		<MotionImage
+			src="https://source.unsplash.com/1600x900/?minimal,city,dark"
+			size="100%"
+		/>
 	</TwoScreenLayout>
 )
 

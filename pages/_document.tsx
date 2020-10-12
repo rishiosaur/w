@@ -11,7 +11,12 @@ class MyDocument extends Document {
 			<Html>
 				<Head />
 				<head>
-					<script src="https://analytics.stacc.cc/api/script/HUI6aj7mNJKd" />
+					<script
+						async
+						defer
+						data-website-id="bca71f7d-7d5c-405f-bf14-8d92f3a950a6"
+						src="https://analytics-ten.vercel.app/umami.js"
+					/>
 					<meta name="robots" content="index, follow" />
 					<meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 					<meta name="language" content="English" />

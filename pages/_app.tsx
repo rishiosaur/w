@@ -83,7 +83,6 @@ function WApp({ Component, pageProps, router, props }) {
 								exit="out"
 								variants={pageVariants}
 								flexDir="column"
-								height="100vh"
 								marginX="auto">
 								<Component {...pageProps} />
 							</MotionFlex>

@@ -9,11 +9,11 @@ const BaseLayout: React.FC = ({ children, ...props }) => (
 			animate="pageAnimate"
 			exit="exit"
 			variants={pageVariants}
-			overflow="visible"
+			// overflow="visible"
 			p={['5%', '5%', '5%', '8%']}
 			margin={['0', '0', '0', '2rem']}
-			overflowWrap="break-word"
-			maxWidth="100%"
+			// overflowWrap="break-word"
+			// maxWidth="100%"
 			alignItems="center"
 			alignContent="center"
 			rounded="md">
