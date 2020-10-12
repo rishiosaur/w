@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
-import { request, gql } from 'graphql-request'
-import { GetStaticPaths, GetStaticProps, GetServerSideProps } from 'next'
+import { gql } from 'graphql-request'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 import Head from 'next/head'
 import { fetchFromCMS } from '../../src/functions/fetch'
@@ -9,21 +9,47 @@ import MarginContainerTwoPage from '../../src/containers/MarginContainerTwoPage'
 import {
 	MotionBox,
 	Text,
-	MotionImage,
 	MotionStack,
 	Markdown,
 	Flex,
 	Box,
-	MotionTag,
+	MotionFlex,
+	TextLink,
 } from '../../src/atoms'
-import { Tag, MotionFlex, Link, TextLink, Divider } from '../../src/atoms/index'
 import { Article } from '../../src/types'
 
-function truncateString(str) {
+const truncateString = (str) => {
 	if (str.length <= 18) {
 		return str
 	}
 	return `${str.slice(0, 18)}...`
+}
+
+const PostSeo: React.FC<{ article: Partial<Article> }> = ({ article }) => {
+	const router = useRouter()
+
+	return (
+		<Head>
+			<title>{article.title} — Rishi Kothari</title>
+			<meta name="title" content={`${article.title} — Rishi Kothari`} />
+			<meta name="description" content={article.description} />
+
+			<meta property="og:type" content="website" />
+			<meta property="og:url" content={`${article.title} — Rishi Kothari`} />
+			<meta property="og:title" content={`${article.title} — Rishi Kothari`} />
+			<meta property="og:description" content={article.description} />
+			<meta property="og:image" content={article.bg} />
+
+			<meta property="twitter:card" content="summary_large_image" />
+			<meta property="twitter:url" content={router.asPath} />
+			<meta
+				property="twitter:title"
+				content={`${article.title} — Rishi Kothari`}
+			/>
+			<meta property="twitter:description" content={article.description} />
+			<meta property="twitter:image" content={article.bg} />
+		</Head>
+	)
 }
 
 interface PostProps {
@@ -130,33 +156,6 @@ const Post: React.FC<PostProps> = ({
 		<PostSeo article={article} />
 	</>
 )
-
-const PostSeo: React.FC<{ article: Partial<Article> }> = ({ article }) => {
-	const router = useRouter()
-
-	return (
-		<Head>
-			<title>{article.title} — Rishi Kothari</title>
-			<meta name="title" content={`${article.title} — Rishi Kothari`} />
-			<meta name="description" content={article.description} />
-
-			<meta property="og:type" content="website" />
-			<meta property="og:url" content={`${article.title} — Rishi Kothari`} />
-			<meta property="og:title" content={`${article.title} — Rishi Kothari`} />
-			<meta property="og:description" content={article.description} />
-			<meta property="og:image" content={article.bg} />
-
-			<meta property="twitter:card" content="summary_large_image" />
-			<meta property="twitter:url" content={router.asPath} />
-			<meta
-				property="twitter:title"
-				content={`${article.title} — Rishi Kothari`}
-			/>
-			<meta property="twitter:description" content={article.description} />
-			<meta property="twitter:image" content={article.bg} />
-		</Head>
-	)
-}
 
 export default Post
 
