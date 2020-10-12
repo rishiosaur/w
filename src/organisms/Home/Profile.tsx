@@ -1,5 +1,13 @@
 import React from 'react'
-import { Text, Stack, Tag, LightMode, TextLink, useTheme } from '../../atoms'
+import {
+	Text,
+	Stack,
+	Tag,
+	LightMode,
+	TextLink,
+	useTheme,
+	Box,
+} from '../../atoms'
 import Widget from '../../molecules/widget/index'
 import { MotionImage, MotionStack } from '../../atoms/index'
 import { containerVariants, childVariants } from '../../molecules/motion/index'
@@ -52,7 +60,6 @@ export function Profile({ spotify }) {
 				<b>Spring 2021</b>. If you have a cool idea, feel free to write me an
 				email at [hey@rishi.cx].
 			</Text>
-
 			<MotionStack direction="row" spacing={3} variants={containerVariants}>
 				{[
 					[
@@ -80,6 +87,11 @@ export function Profile({ spotify }) {
 						'https://source.unsplash.com/IgWNxx7paz4/80x80',
 						'mail',
 					],
+					[
+						"https://ranalytics.now.sh/share/D3HbT7eA/Rishi's%20Portfolio",
+						'https://source.unsplash.com/-1CPNSnsABc/80x80',
+						'anlyt',
+					],
 				].map(([url, bg, title]) => (
 					<Widget
 						variants={childVariants}
@@ -91,8 +103,6 @@ export function Profile({ spotify }) {
 					/>
 				))}
 			</MotionStack>
-
-			<br />
 		</Stack>
 	)
 }
