@@ -1,3 +1,4 @@
+import React from 'react'
 import { Text, Stack, Tag, LightMode, TextLink, useTheme } from '../../atoms'
 import Widget from '../../molecules/widget/index'
 import { MotionImage, MotionStack } from '../../atoms/index'
@@ -35,9 +36,9 @@ export function Profile({ spotify }) {
 				</Text>
 			)}
 			<Text>
-				<b>TL;DR</b> I'm a 15 year old software engineer, SaaS startup CEO, and
-				coffee lover that really likes to make things using <em>awesome</em>{' '}
-				technologies.
+				<b>TL;DR</b> I'm a 15 year old open-source software engineer, SaaS
+				startup CEO, and coffee lover that really likes to make things using{' '}
+				<em>awesome</em> technologies.
 			</Text>
 
 			<Text>
@@ -53,30 +54,42 @@ export function Profile({ spotify }) {
 			</Text>
 
 			<MotionStack direction="row" spacing={3} variants={containerVariants}>
-				<Widget
-					variants={childVariants}
-					link="https://github.com/rishiosaur"
-					bgImage="https://source.unsplash.com/pcZvxrAyYoQ/80x80"
-					title="gh"
-					before="link"
-					size="5rem"
-				/>
-				<Widget
-					variants={childVariants}
-					link="https://github.com/rishiosaur"
-					bgImage="https://source.unsplash.com/8xznAGy4HcY/80x80"
-					title="twtr"
-					before="link"
-					size="5rem"
-				/>
-				<Widget
-					variants={childVariants}
-					link="https://github.com/rishiosaur"
-					bgImage="https://source.unsplash.com/IgWNxx7paz4/80x80"
-					title="ig"
-					before="link"
-					size="5rem"
-				/>
+				{[
+					[
+						'https://github.com/rishiosaur',
+						'https://source.unsplash.com/pcZvxrAyYoQ/80x80',
+						'gh',
+					],
+					[
+						'https://github.com/rishiosaur',
+						'https://source.unsplash.com/8xznAGy4HcY/80x80',
+						'twtr',
+					],
+					[
+						'https://github.com/rishiosaur',
+						'https://source.unsplash.com/IgWNxx7paz4/80x80',
+						'ig',
+					],
+					[
+						'https://linkedin.com/in/heyrishi',
+						'https://source.unsplash.com/IgWNxx7paz4/80x80',
+						'lkdn',
+					],
+					[
+						'mailto:hey@rishi.cx',
+						'https://source.unsplash.com/IgWNxx7paz4/80x80',
+						'mail',
+					],
+				].map(([url, bg, title]) => (
+					<Widget
+						variants={childVariants}
+						link={url}
+						bgImage={bg}
+						title={title}
+						before="link"
+						size="5rem"
+					/>
+				))}
 			</MotionStack>
 
 			<br />
