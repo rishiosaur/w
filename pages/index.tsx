@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import React from 'react'
 import useSwr from 'swr'
 import { GetServerSideProps, GetStaticProps } from 'next'
 import { gql } from 'graphql-request'
