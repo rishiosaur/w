@@ -28,7 +28,7 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 
 	return (
 		<>
-			<HomeSeo />
+			<HomeSeo spotify={data} />
 			<TwoScreenLayout
 				variants={
 					{
@@ -111,7 +111,7 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 export default Home
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-	const { projects, articles } = await fetchFromCMS(gql`
+	const { projects, articles: _articles } = (await fetchFromCMS(gql`
 		{
 			projects {
 				id
@@ -126,44 +126,12 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 				created_at
 			}
 		}
-	`)
+	`)) as {
+		projects: Partial<Project>[]
+		articles: Partial<Article>[]
+	}
 
-	console.log(articles)
-
-	// const response = await getNowPlaying()
-
-	// console.log(response)
-	// let spotify = {}
-
-	// if (!(response.status === 204 || response.status > 400)) {
-	// 	// console.log(await response.json())
-
-	// 	const { item: song, is_playing: playing, ...other } = await response.json()
-
-	// 	console.log({
-	// 		song,
-	// 		playing,
-	// 		other,
-	// 	})
-
-	// 	console.log(other)
-
-	// 	if (playing && !(other.currently_playing_type === 'ad')) {
-	// 		const { album, artists: sptfyArtists, external_urls, name } = song
-
-	// 		const artists = sptfyArtists.map((artist) => artist.name).join(' + ')
-
-	// 		spotify = {
-	// 			artists,
-	// 			album,
-	// 			name,
-	// 			url: external_urls.spotify,
-	// 			playing: true,
-	// 		}
-	// 	}
-	// }
-
-	const ar = articles.map((article) => ({
+	const articles = _articles.map((article) => ({
 		...article,
 		created_at: new Date(article.created_at).toLocaleDateString('en-US', {
 			weekday: 'short',
@@ -172,20 +140,23 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 			day: 'numeric',
 		}),
 	}))
-	console.log(ar)
 
 	return {
 		props: {
 			projects,
-			articles: ar,
-			// spotify,
+			articles,
 		},
 	}
 }
 
-const HomeSeo: React.FC = () => (
+const HomeSeo: React.FC<{ spotify: any }> = ({ spotify }) => (
 	<Head>
-		<title>Rishi Kothari | Software Engineer</title>
+		<title>
+			Rishi |
+			{spotify?.playing
+				? ` Listening to: ${spotify.name} — ${spotify.artists}`
+				: ' Software Engineer'}
+		</title>
 		<meta name="title" content="Rishi Kothari | Software Engineer" />
 		<meta
 			name="description"

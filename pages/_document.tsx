@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-
+import React from 'react'
 class MyDocument extends Document {
 	static async getInitialProps(ctx) {
 		const initialProps = await Document.getInitialProps(ctx)
@@ -11,6 +11,7 @@ class MyDocument extends Document {
 			<Html>
 				<Head />
 				<head>
+					<script src="https://analytics.stacc.cc/api/script/HUI6aj7mNJKd" />
 					<meta name="robots" content="index, follow" />
 					<meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 					<meta name="language" content="English" />
