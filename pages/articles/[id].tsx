@@ -17,6 +17,7 @@ import {
 	TextLink,
 } from '../../src/atoms'
 import { Article } from '../../src/types'
+import { childVariants } from '../../src/molecules/motion/index'
 
 const truncateString = (str) => {
 	if (str.length <= 18) {
@@ -67,9 +68,8 @@ const Post: React.FC<PostProps> = ({
 		<MarginContainerTwoPage>
 			<MotionFlex
 				backgroundImage={`url('${article.bg}')`}
-				height="100%"
+				height="50vh"
 				width="100%"
-				size="100%"
 				backgroundPosition="center"
 				backgroundRepeat="no-repeat"
 				backgroundAttachment="fill"
@@ -78,16 +78,12 @@ const Post: React.FC<PostProps> = ({
 				borderColor="color"
 				rounded="sm"
 				alignItems="center"
+				variants={childVariants}
 				justifyContent="center">
-				<MotionStack
-					p="5rem"
-					border={['0', '0', '0', '1px']}
-					borderColor="color"
-					rounded="sm"
-					maxWidth="30rem">
+				<MotionStack p="5rem" borderColor="color" rounded="sm" maxWidth="30rem">
 					<Text fontSize="0.5rem">Article</Text>
 					<Text fontSize="2rem">{article.title}</Text>
-					{article.projects && (
+					{article.projects.length > 0 && (
 						<MotionStack direction="row" spacing="0.25rem">
 							<Text fontSize="0.75rem">
 								Associated projects:{' '}
