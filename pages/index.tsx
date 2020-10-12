@@ -24,7 +24,7 @@ type HomeProps = {
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 const Home: React.FC<HomeProps> = ({ projects, articles }) => {
-	const { data } = useSwr('/api/spotify', fetcher)
+	const { data } = useSwr('/api/spotify', fetcher, { refreshInterval: 1500 })
 
 	return (
 		<>
