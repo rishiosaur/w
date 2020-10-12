@@ -2,9 +2,9 @@ import { Variants } from 'framer-motion'
 export const pageVariants: Variants = {
 	initial: {
 		opacity: 0,
-		y: -20,
-		rotateX: 10,
-		rotateY: -10,
+		y: 50,
+		// rotateX: 10,
+		// rotateY: -10,
 	},
 	animate: {
 		opacity: 1,
@@ -19,8 +19,8 @@ export const pageVariants: Variants = {
 	out: {
 		opacity: 0,
 		y: -20,
-		rotateX: -10,
-		rotateY: -10,
+		// rotateX: -10,
+		// rotateY: -10,
 	},
 }
 
