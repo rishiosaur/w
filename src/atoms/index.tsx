@@ -105,14 +105,14 @@ export const Markdown: React.FC<{ children: string }> = ({ children }) => (
 					},
 				},
 				Divider: {
-					component: Divider
+					component: Divider,
 				},
 				MotionGrid: {
-					component: MotionGrid
+					component: MotionGrid,
 				},
 				img: {
-					component: MotionImage
-				}
+					component: MotionImage,
+				},
 				// h2: {
 				// 	tex,
 				// },
