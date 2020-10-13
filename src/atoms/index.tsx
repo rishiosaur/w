@@ -15,6 +15,7 @@ import {
 	ImageProps,
 	useTheme,
 	useColorMode,
+	Divider,
 } from '@chakra-ui/core'
 import { default as MD } from 'markdown-to-jsx'
 import Link from 'next/link'
@@ -51,6 +52,13 @@ export const H1: React.FC = ({ children, ...props }) => (
 	</ChakraText>
 )
 
+const Headr = ({ children, ...props }) => (
+	<>
+		<Divider />
+		<ChakraText {...props}>{children}</ChakraText>
+	</>
+)
+
 const Te: React.FC = ({ children, ...props }) => (
 	<>
 		<ChakraText {...props}>{children}</ChakraText>
@@ -62,9 +70,6 @@ export const Markdown: React.FC<{ children: string }> = ({ children }) => (
 	<MD
 		options={{
 			overrides: {
-				h1: {
-					component: H1,
-				},
 				br: {
 					component: (
 						<>
@@ -75,6 +80,54 @@ export const Markdown: React.FC<{ children: string }> = ({ children }) => (
 				},
 				p: {
 					component: Te,
+				},
+				hr: {
+					component: Divider,
+				},
+				code: {
+					component: ChakraCode,
+					props: {
+						variantColor: 'color',
+					},
+				},
+				h1: {
+					component: Headr,
+					props: {
+						fontSize: '2rem',
+						marginY: '2rem',
+					},
+				},
+				h2: {
+					component: ChakraText,
+					props: {
+						fontSize: '1.5rem',
+						fontWeight: 'bold',
+					},
+				},
+				Divider: {
+					component: Divider
+				},
+				MotionGrid: {
+					component: MotionGrid
+				},
+				img: {
+					component: MotionImage
+				}
+				// h2: {
+				// 	tex,
+				// },
+				// h3: {
+				// 	tex,
+				// },
+				// h4: {
+				// 	tex,
+				// },
+				// h5: {
+				// 	tex,
+				// },
+				// h6: {},
+				a: {
+					component: TextLink,
 				},
 			},
 		}}>
@@ -87,11 +140,13 @@ export * from '@chakra-ui/core'
 interface TextLinkProps {
 	href: string
 	text: string
+	title?: string
 }
 
 export const TextLink: React.FC<MotionProps & TextLinkProps & any> = ({
 	href,
 	text,
+	title,
 	children,
 	...props
 }) => {
@@ -112,13 +167,13 @@ export const TextLink: React.FC<MotionProps & TextLinkProps & any> = ({
 							colorMode === 'dark' ? theme.colors.white : theme.colors.black,
 						color:
 							colorMode === 'dark' ? theme.colors.black : theme.colors.white,
-						padding: '0.25rem',
-						borderRadius: '0.1rem',
+						padding: text ? '0.25rem' : '0.1rem',
+						borderRadius: text ? '0.1rem' : '0.2rem',
 					}}>
 					<motion.a
 						// transition={{ ease: 'ease-in-out' }}
 						{...props}>
-						[{text}]{children}
+						{text ? `[${text}]` : children}
 					</motion.a>
 				</motion.span>
 			</Link>
