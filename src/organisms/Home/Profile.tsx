@@ -1,5 +1,5 @@
 import React from 'react'
-import {isSafari} from 'react-device-detect';
+import { isSafari } from 'react-device-detect'
 import {
 	Text,
 	Stack,
@@ -28,7 +28,11 @@ export function Profile({ spotify }) {
 						transition: { duration: 0.5, damping: 10 },
 					},
 				}}
-				src={!isSafari ? 'https://i.ibb.co/JrN91Vt/photo-grid-20-09-2020-09-21-20-2-2-1.webp' : 'https://scrapbook.hackclub.com/attachments/02cbaad88de654cd9508069400e7f4a7/7e8503ea/'}
+				src={
+					!isSafari
+						? 'https://i.ibb.co/JrN91Vt/photo-grid-20-09-2020-09-21-20-2-2-1.webp'
+						: 'https://scrapbook.hackclub.com/attachments/02cbaad88de654cd9508069400e7f4a7/7e8503ea/'
+				}
 				rounded="md"
 				size="15rem"
 			/>
