@@ -1,4 +1,5 @@
 import React from 'react'
+import {isSafari} from 'react-device-detect';
 import {
 	Text,
 	Stack,
@@ -11,7 +12,6 @@ import {
 import Widget from '../../molecules/widget/index'
 import { MotionImage, MotionStack } from '../../atoms/index'
 import { containerVariants, childVariants } from '../../molecules/motion/index'
-import {isSafari} from 'react-device-detect';
 
 export function Profile({ spotify }) {
 	return (
