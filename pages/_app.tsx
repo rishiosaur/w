@@ -18,7 +18,7 @@ import {
 } from 'framer-motion'
 import { useEffect } from 'react'
 import App from 'next/app'
-import { MotionFlex } from '../src/atoms/index'
+import { MotionFlex, MotionBox } from '../src/atoms/index'
 import { pageVariants } from '../src/molecules/motion/index'
 
 import { getTheme } from '../src/functions/fetch'
@@ -90,7 +90,8 @@ function WApp({ Component, pageProps, router, props }) {
 					</ColorModeProvider>
 				</ThemeProvider>
 			</AnimatePresence>
-			<motion.div
+			<MotionBox
+				display={['none', 'none', 'none', 'initial']}
 				className="cursor"
 				style={{
 					translateX: cursorXSpring,
