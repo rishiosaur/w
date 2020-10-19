@@ -79,12 +79,12 @@ export function Profile({ spotify }) {
 					],
 					[
 						'https://github.com/rishiosaur',
-						'https://source.unsplash.com/IgWNxx7paz4/80x80',
+						'https://source.unsplash.com/TrF3SYQ5skU/80x80',
 						'ig',
 					],
 					[
 						'https://linkedin.com/in/heyrishi',
-						'https://source.unsplash.com/IgWNxx7paz4/80x80',
+						'https://source.unsplash.com/5gY9foYjQK8/80x80',
 						'lkdn',
 					],
 					[
@@ -96,6 +96,11 @@ export function Profile({ spotify }) {
 						"https://ranalytics.now.sh/share/D3HbT7eA/Rishi's%20Portfolio",
 						'https://source.unsplash.com/-1CPNSnsABc/80x80',
 						'anlyt',
+					],
+					[
+						"/resume.pdf",
+						'https://source.unsplash.com/0tvsOwILTPs/80x80',
+						'resum',
 					],
 				].map(([url, bg, title]) => (
 					<Widget
