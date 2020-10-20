@@ -10,8 +10,10 @@ import {
 	Box,
 } from '../../atoms'
 import Widget from '../../molecules/widget/index'
-import { MotionImage, MotionStack } from '../../atoms/index'
+import { MotionImage, MotionStack, MotionGrid } from '../../atoms/index'
 import { containerVariants, childVariants } from '../../molecules/motion/index'
+
+const s = '6.5rem'
 
 export function Profile({ spotify }) {
 	return (
@@ -57,15 +59,32 @@ export function Profile({ spotify }) {
 			<Text>
 				I've been programming for about 7 years now (I started all the way back
 				when I was 8), and I've been able to get my hands onto a lot of
-				different technologies and work positions.
+				different technologies and{' '}
+				<TextLink text="work positions" href="/resume.pdf" />
 			</Text>
 
 			<Text>
 				While I'm not currently looking for internships, my next opening is in{' '}
-				<b>Spring 2021</b>. If you have a cool idea, feel free to write me an
-				email at [hey@rishi.cx].
+				<b>Spring 2021</b>. If you have a cool idea, feel free to write me an{' '}
+				<TextLink text="email" href="mailto:itsrishikothari@gmail.com" />.
 			</Text>
-			<MotionStack direction="row" spacing={3} variants={containerVariants}>
+
+			<MotionGrid
+				templateColumns={`repeat(auto-fit, ${s})`}
+				templateRows={`repeat(auto-fit, ${s})`}
+				gap={2}
+				variants={{
+					hidden: { opacity: 0 },
+					show: {
+						opacity: 1,
+						transition: {
+							staggerChildren: 0.1,
+							delayChildren: 1,
+						},
+					},
+				}}
+				initial="hidden"
+				animate="show">
 				{[
 					[
 						'https://github.com/rishiosaur',
@@ -88,7 +107,7 @@ export function Profile({ spotify }) {
 						'lkdn',
 					],
 					[
-						'mailto:hey@rishi.cx',
+						'mailto:itsrishikothari@gmail.com',
 						'https://source.unsplash.com/IgWNxx7paz4/80x80',
 						'mail',
 					],
@@ -98,9 +117,9 @@ export function Profile({ spotify }) {
 						'anlyt',
 					],
 					[
-						"/resume.pdf",
+						'/resume.pdf',
 						'https://source.unsplash.com/0tvsOwILTPs/80x80',
-						'resum',
+						'resume',
 					],
 				].map(([url, bg, title]) => (
 					<Widget
@@ -109,10 +128,10 @@ export function Profile({ spotify }) {
 						bgImage={bg}
 						title={title}
 						before="link"
-						size="5rem"
+						size={s}
 					/>
 				))}
-			</MotionStack>
+			</MotionGrid>
 		</Stack>
 	)
 }
