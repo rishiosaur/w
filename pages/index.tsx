@@ -5,7 +5,7 @@ import { GetServerSideProps, GetStaticProps } from 'next'
 import { gql } from 'graphql-request'
 import { Variants, motion } from 'framer-motion'
 import fetch from 'node-fetch'
-import { Box, Text, Grid, Flex, Image, MotionGrid } from '../src/atoms'
+import { Box, Text, Grid, Flex, Image, MotionGrid, Divider } from '../src/atoms'
 
 import { fetchFromCMS, getNowPlaying } from '../src/functions/fetch'
 import TwoScreenLayout from '../src/containers/MarginContainerTwoPage'
@@ -48,7 +48,6 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 						hidden: { opacity: 0 },
 						show: {
 							opacity: 1,
-							// rotateX: 0,
 							transition: {
 								damping: 100,
 							},
@@ -58,13 +57,16 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 					justifyContent="space-between">
 					<Profile spotify={data} />
 				</MotionFlex>
+				<Divider
+					marginY="3rem"
+					display={['initial', 'initial', 'initial', 'none']}
+				/>
 				<MotionStack
 					spacing="2rem"
 					variants={{
 						hidden: { opacity: 0 },
 						show: {
 							opacity: 1,
-							// rotateX: 0,
 							transition: {
 								damping: 100,
 							},
@@ -73,8 +75,8 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 					<Text>Selected Works</Text>
 
 					<MotionGrid
-						templateColumns="repeat(auto-fit, 7rem)"
-						templateRows="repeat(auto-fit, 7rem)"
+						templateColumns="repeat(auto-fit, 10rem)"
+						templateRows="repeat(auto-fit, 10rem)"
 						gap={3}
 						variants={{
 							hidden: { opacity: 0 },
@@ -96,6 +98,7 @@ const Home: React.FC<HomeProps> = ({ projects, articles }) => {
 								bgImage={project.preview}
 								title={project.title}
 								before="Project"
+								size="10rem"
 							/>
 						))}
 					</MotionGrid>
