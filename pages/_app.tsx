@@ -117,6 +117,7 @@ function WApp({ Component, pageProps, router, props }) {
 						pointer-events: none;
 						transition: width 0.1s ease-in-out, height 0.1s ease-in-out;
 					}
+
 					* {
 						cursor: none;
 					}
