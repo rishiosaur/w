@@ -66,6 +66,8 @@ const Te: React.FC = ({ children, ...props }) => (
 	</>
 )
 
+const DD = () => <Divider px="2rem" />
+
 export const Markdown: React.FC<{ children: string }> = ({ children }) => (
 	<MD
 		options={{
@@ -82,7 +84,7 @@ export const Markdown: React.FC<{ children: string }> = ({ children }) => (
 					component: Te,
 				},
 				hr: {
-					component: Divider,
+					component: DD,
 				},
 				code: {
 					component: ChakraCode,
@@ -105,7 +107,7 @@ export const Markdown: React.FC<{ children: string }> = ({ children }) => (
 					},
 				},
 				Divider: {
-					component: Divider,
+					component: DD,
 				},
 				MotionGrid: {
 					component: MotionGrid,

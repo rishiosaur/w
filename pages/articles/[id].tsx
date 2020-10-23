@@ -68,7 +68,7 @@ const Post: React.FC<PostProps> = ({
 		<MarginContainerTwoPage>
 			<MotionFlex
 				backgroundImage={`url('${article.bg}')`}
-				height="50vh"
+				height="65vh"
 				width="100%"
 				backgroundPosition="center"
 				backgroundRepeat="no-repeat"
@@ -97,6 +97,14 @@ const Post: React.FC<PostProps> = ({
 						</MotionStack>
 					)}
 					<Text overflowWrap="break-word">{article.description}</Text>
+					<Text>
+						{new Date(article.created_at).toLocaleDateString('en-US', {
+							weekday: 'short',
+							year: 'numeric',
+							month: 'short',
+							day: 'numeric',
+						})}
+					</Text>
 					<Flex>
 						{article.categories?.map(({ name, id }) => (
 							<TextLink href={`/categories/${id}`} text={name} />
