@@ -55,7 +55,7 @@ export function Profile({ spotify }) {
 			<Text>
 				<TextLink
 					text="←"
-					href="https://webring.rishi.cx/previous?w=https://rishi.cx"
+					href="https://webring.rishi.cx/previous?w=https://rishi.cx/"
 				/>{' '}
 				<b>TL;DR</b> I'm a 15 year old open-source software engineer, SaaS
 				startup CEO, and coffee lover that really likes to make things using{' '}
@@ -75,7 +75,7 @@ export function Profile({ spotify }) {
 				email.{' '}
 				<TextLink
 					text="→"
-					href="https://webring.rishi.cx/next?w=https://rishi.cx"
+					href="https://webring.rishi.cx/next?w=https://rishi.cx/"
 				/>
 			</Text>
 
