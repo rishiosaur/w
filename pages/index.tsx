@@ -155,7 +155,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 const HomeSeo: React.FC<{ spotify: any }> = ({ spotify }) => (
 	<Head>
 		<title>
-			Rishi |
+			Rishi Kothari |
 			{spotify?.playing
 				? ` Listening to: ${spotify.name} — ${spotify.artists}`
 				: ' Software Engineer'}
