@@ -131,6 +131,11 @@ export function Profile({ spotify }) {
 						'https://source.unsplash.com/0tvsOwILTPs/80x80',
 						'resume',
 					],
+					[
+						'https://l.rishi.cx',
+						'https://source.unsplash.com/mtf9jIj2vg0/80x80',
+						'links',
+					],
 				].map(([url, bg, title]) => (
 					<Widget
 						variants={childVariants}
