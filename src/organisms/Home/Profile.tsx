@@ -42,9 +42,7 @@ export function Profile({ spotify }) {
 			/>
 			<Text>Hi there! 👋</Text>
 			<Stack direction="row" alignItems="center">
-				<Text fontSize="2rem">
-					I'm Rishi Kothari.
-				</Text>
+				<Text fontSize="2rem">I'm Rishi Kothari.</Text>
 
 				<TextLink text="he/him" href="https://pronoun.is/he/him" />
 			</Stack>
@@ -55,6 +53,10 @@ export function Profile({ spotify }) {
 				</Text>
 			)}
 			<Text>
+				<TextLink
+					text="←"
+					href="https://webring.rishi.cx/previous?w=https://rishi.cx"
+				/>{' '}
 				<b>TL;DR</b> I'm a 15 year old open-source software engineer, SaaS
 				startup CEO, and coffee lover that really likes to make things using{' '}
 				<em>awesome</em> technologies.
@@ -69,8 +71,12 @@ export function Profile({ spotify }) {
 
 			<Text>
 				While I'm not currently looking for internships, my next opening is in{' '}
-				<b>Spring 2021</b>. If you have a cool idea, feel free to write me an{' '}
-				<TextLink text="email" href="mailto:itsrishikothari@gmail.com" />.
+				<b>Spring 2021</b>. If you have a cool idea, feel free to write me an
+				email.{' '}
+				<TextLink
+					text="→"
+					href="https://webring.rishi.cx/next?w=https://rishi.cx"
+				/>
 			</Text>
 
 			<MotionGrid
