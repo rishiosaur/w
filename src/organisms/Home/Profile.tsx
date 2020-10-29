@@ -42,8 +42,7 @@ export function Profile({ spotify }) {
 			/>
 			<Text>Hi there! 👋</Text>
 			<Stack direction="row" alignItems="center">
-
-				<Text marginLeft="1rem" fontSize="2rem">
+				<Text fontSize="2rem">
 					I'm Rishi Kothari.
 				</Text>
 
