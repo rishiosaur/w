@@ -8,6 +8,8 @@ import {
 	TextLink,
 	useTheme,
 	Box,
+	Link,
+	Image,
 } from '../../atoms'
 import Widget from '../../molecules/widget/index'
 import { MotionImage, MotionStack, MotionGrid } from '../../atoms/index'
@@ -40,7 +42,18 @@ export function Profile({ spotify }) {
 			/>
 			<Text>Hi there! 👋</Text>
 			<Stack direction="row" alignItems="center">
-				<Text fontSize="2rem">I'm Rishi Kothari.</Text>
+				<TextLink href="https://webring.xxiivv.com">
+					<img
+						alt="Webring"
+						src="https://webring.xxiivv.com/icon.black.svg"
+						width="25rem"
+						height="auto"
+					/>
+				</TextLink>
+
+				<Text marginLeft="1rem" fontSize="2rem">
+					I'm Rishi Kothari.
+				</Text>
 
 				<TextLink text="he/him" href="https://pronoun.is/he/him" />
 			</Stack>
