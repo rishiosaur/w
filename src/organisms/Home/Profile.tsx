@@ -132,7 +132,7 @@ export function Profile({ spotify }) {
 						'resume',
 					],
 					[
-						'https://l.rishi.cx',
+						'https://z.rishi.cx/dir',
 						'https://source.unsplash.com/mtf9jIj2vg0/80x80',
 						'links',
 					],
