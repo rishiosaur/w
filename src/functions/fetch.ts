@@ -8,14 +8,7 @@ import querystring from 'querystring'
 export const fetchFromCMS = async (
 	document: RequestDocument,
 	variables?: Variables
-) =>
-	request(
-		process.env.NODE_ENV === 'production'
-			? 'https://rishi-portfolio-backend.herokuapp.com/graphql'
-			: 'http://localhost:1337/graphql',
-		document,
-		variables
-	)
+) => request('https://c.rishi.cx/graphql', document, variables)
 
 export const getTheme = async () => {
 	const colors = ['indigo', 'gold', 'blue', 'violet']
